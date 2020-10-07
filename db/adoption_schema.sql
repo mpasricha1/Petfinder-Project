@@ -1,36 +1,35 @@
-﻿drop table if exists animal;
-drop table if exists breed;
-drop table if exists color;
-drop table if exists state;
-
+﻿DROP TABLE IF EXISTS animal;
+DROP TABLE IF EXISTS breed;
+DROP TABLE IF EXISTS color;
+DROP TABLE IF EXISTS state;
 
 CREATE TABLE "animal" (
     "id" serial  NOT NULL,
-    "type" INT   NOT NULL,
-    "name" varchar NOT NULL,
-    "age" INT   NOT NULL,
-    "breed1" INT   NOT NULL,
-    "breed2" INT   NOT NULL,
-    "gender" INT   NOT NULL,
-    "color1" INT   NOT NULL,
-    "color2" INT   NOT NULL,
-    "color3" INT   NOT NULL,
-    "maturity_size" INT   NOT NULL,
-    "furlength" INT   NOT NULL,
-    "vaccinated" INT   NOT NULL,
-    "dewormed" INT   NOT NULL,
-    "sterlized" INT   NOT NULL,
-    "health" INT   NOT NULL,
-    "quantity" INT   NOT NULL,
-    "fee" INT   NOT NULL,
-    "state" INT   NOT NULL,
-    "rescuer_id" varchar   NOT NULL,
-    "video_amt" INT   NOT NULL,
-    "description" varchar   NOT NULL,
-    "pet_id" varchar  NOT NULL,
-    "photo_amt" INT   NOT NULL,
+    "type" INT,
+    "name" varchar,
+    "age" INT,
+    "breed1" INT,
+    "breed2" INT,
+    "gender" INT,
+    "color1" INT,
+    "color2" INT,
+    "color3" INT,
+    "maturity_size" INT,
+    "furlength" INT,
+    "vaccinated" INT,
+    "dewormed" INT,
+    "sterlized" INT,
+    "health" INT,
+    "quantity" INT,
+    "fee" INT,
+    "state" INT,
+    "rescuer_id" varchar,
+    "video_amt" INT,
+    "description" varchar,
+    "pet_id" varchar,
+    "photo_amt" INT,
     "adoption_speed" INT,
-	"test_train" varchar NOT NULL,
+	"test_train" varchar,
     CONSTRAINT "pk_animal" PRIMARY KEY (
         "id"
      )
@@ -78,4 +77,3 @@ REFERENCES "color" ("color_id");
 
 ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_state" FOREIGN KEY("state")
 REFERENCES "state" ("state_id");
-
