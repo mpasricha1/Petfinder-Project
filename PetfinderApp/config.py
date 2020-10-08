@@ -1,3 +1,2 @@
 API_KEY = "hnamhhNlo9ynNGZ2mBQQBE8poKKtxOfi93fyrfYZbr4uowxRFl"
-
-SECRET_KEY = "3E4kWcutpAcRfncWjc5xga993sBKWTmgVKf1VymQ"
+SECRET_KEY = "42ShWqBTfamETvYx1Np6ihJikPMRu415CV716r6x"
