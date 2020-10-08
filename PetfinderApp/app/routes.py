@@ -24,17 +24,12 @@ def callback():
         client_secret=clientSecret)
 
 	accessToken = token["access_token"]
-
 	headers = {
 	    'Authorization': f'Bearer {accessToken}',
 	}
-
-
 	params = (
 	    ('type', 'dog'),
-	    ('page', '2'),
+	    ('page', '1'),
 	)
 
-	response = requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params).json()
-
-	return response
+	return jsonify(requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params).json())
