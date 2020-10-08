@@ -23,9 +23,8 @@ def callback():
 	token = oauth.fetch_token(token_url=tokenURL, client_id=clientID,
         client_secret=clientSecret)
 
-	accessToken = token["access_token"]
 	headers = {
-	    'Authorization': f'Bearer {accessToken}',
+	    'Authorization': f'Bearer {token["access_token"]}',
 	}
 	params = (
 	    ('type', 'dog'),
