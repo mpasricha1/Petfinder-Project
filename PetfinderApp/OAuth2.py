@@ -18,8 +18,12 @@ class PetfinderAPI:
 		headers = {
 	    	'Authorization': f'Bearer {token["access_token"]}',
 		}
-		params = (
-	    	('page', f'{page}'),
-	    	('status', 'adopted')
-		)
+		params = {
+	    	"page": f"{page}",
+	    	"status": "adopted" 
+
+		}
+
+		r = requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params)
+		print(r.url)
 		return requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params).json()

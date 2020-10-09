@@ -3,7 +3,7 @@ from flask.json import jsonify
 import config
 import time
 from OAuth2 import PetfinderAPI
-from dataEncoder import encoder
+#from dataEncoder import encoder
 from app import app 
 
 clientID1 = config.API_KEY_MARK
@@ -25,13 +25,13 @@ def index():
 @app.route('/getdata')
 def getdata():
 	moreData = True
-	currentPage = 1 
+	currentPage = 10
 
 	authenticator = PetfinderAPI(clientID1, clientSecret1, tokenURL)
 	token = authenticator.generateAccessToken()
 	data = authenticator.callAPI(token,currentPage)
 
-	encoder = encoder(data)
-	encoder.encodeDate()
+	# dataEncoder = encoder(data)
+	# dataEncoder.encodeData()
 
 	return jsonify(data)
