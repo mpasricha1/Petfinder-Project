@@ -6,8 +6,8 @@ from flask.json import jsonify
 import config
 from app import app 
 
-clientID = config.API_KEY
-clientSecret = config.SECRET_KEY
+clientID = config.API_KEY_MARK
+clientSecret = config.SECRET_KEY_MARK
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
 
@@ -28,7 +28,8 @@ def callback():
 	}
 	params = (
 	    ('type', 'dog'),
-	    ('page', '1'),
+	    ('page', '10000'),
+	    ('status', 'adopted')
 	)
 
 	return jsonify(requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params).json())
