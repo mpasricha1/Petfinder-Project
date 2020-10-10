@@ -24,6 +24,7 @@ class PetfinderAPI:
 
 		}
 
-		r = requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params)
-		print(r.url)
+		# r = requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params)
+		# print(r.url)
+		
 		return requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params).json()
