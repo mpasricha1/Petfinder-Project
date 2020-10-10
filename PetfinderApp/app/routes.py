@@ -36,14 +36,19 @@ def index():
 
 @app.route('/getdata')
 def getdata():
+	session = Session(engine)
 	moreData = True
 	currentPage = 10
+
+	breeds = session.query(Breed.breed_id, Breed.breed_name).all()
+	colors = session.query(Color.color_id, Color.color_name)
 
 	authenticator = PetfinderAPI(clientID1, clientSecret1, tokenURL)
 	token = authenticator.generateAccessToken()
 	data = authenticator.callAPI(token,currentPage)
 
 	dataEncoder = encoder(data)
-	dataEncoder.parseAnimal()
+	dataEncoder.parseAnimal(breeds, colors)
 
+	session.close()
 	return jsonify(data)
