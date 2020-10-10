@@ -1,0 +1,49 @@
+id,color_code,color_name
+1,1,Black
+2,2,Brown
+3,2,Brown / Chocolate
+4,2,Chocolate
+5,2,Sable
+6,2,Silver Marten
+7,2,Tabby (Brown / Chocolate)
+8,2,Tabby (Leopard / Spotted)
+9,3,Golden
+10,3,Yellow
+11,4,Black & White / Tuxedo
+12,4,Tuxedo
+13,5,Cream
+14,5,Cream / Ivory
+15,5,Cream Point
+16,6,Gray
+17,6,Smoke
+18,7,Flame Point
+19,7,Gray & White
+20,7,Lilac
+21,7,Lilac Point
+22,7,White
+23,8,Undefined
+24,9,Buff
+25,9,Buff & White
+26,9,Buff / Tan / Fawn
+27,9,Fawn
+28,9,Tabby (Buff / Tan / Fawn)
+29,9,Tabby (Tiger Striped)
+30,9,Tan
+31,10,Agouti
+32,10,Calico
+33,10,Dilute Calico
+34,10,Dilute Tortoiseshell
+35,10,Torbie
+36,10,Tortoiseshell
+37,11,Chocolate Point
+38,11,Seal Point
+39,12,Blue
+40,12,Blue / Gray
+41,12,Blue Cream
+42,12,Blue Point
+43,12,Gray / Blue / Silver
+44,12,Silver
+45,12,Tabby (Gray / Blue / Silver)
+46,14,Orange & White
+47,14,Orange / Red
+48,14,Tabby (Orange / Red)
