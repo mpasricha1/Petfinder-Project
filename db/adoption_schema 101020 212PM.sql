@@ -40,6 +40,7 @@ CREATE TABLE "animal" (
 	"good_with_kids" INT,
 	"good_with_cats" INT,
 	"good_with_dogs" INT,
+	"url" text,
     CONSTRAINT "pk_animal" PRIMARY KEY (
         "id"
      )

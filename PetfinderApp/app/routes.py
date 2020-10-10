@@ -41,32 +41,32 @@ def getdata():
 	moreData = True
 	currentPage = 10
 
-	# breeds = session.query(Breed.breed_id, Breed.breed_name).all()
-	# colors = session.query(Color.color_id, Color.color_name)
+	breeds = session.query(Breed.breed_id, Breed.breed_name).all()
+	colors = session.query(Color.color_code, Color.color_name).all()
+	states = session.query(State.state_id, State.state_name)
 
-	# authenticator = PetfinderAPI(clientID1, clientSecret1, tokenURL)
-	# authenticator2 = PetfinderAPI(clientID2, clientSecret2, tokenURL)
+	authenticator = PetfinderAPI(clientID1, clientSecret1, tokenURL)
+	authenticator2 = PetfinderAPI(clientID2, clientSecret2, tokenURL)
 
-	# token = authenticator.generateAccessToken()
-	# data = authenticator.callAPI(token,currentPage, "dog")
+	token = authenticator.generateAccessToken()
+	data = authenticator.callAPI(token,currentPage, "dog")
 
-	# dataEncoder = encoder(data)
-	# dataEncoder.parseAnimal(breeds, colors)
+	dataEncoder = encoder(data)
+	dataEncoder.encodeAnimal(breeds, colors, states)
 
-	sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
-		   Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
-		   Animal.dewormed, Animal.sterilized, Animal.health, Animal.fee, Animal.adoption_speed ]
+	# sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
+	# 	   Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
+	# 	   Animal.dewormed, Animal.sterilized, Animal.health, Animal.fee, Animal.adoption_speed ]
 
-	trainData = session.query(*sel).\
-		   filter(Animal.test_train == 'train').all()
+	# trainData = session.query(*sel).\
+	# 	   filter(Animal.test_train == 'train').all()
 
-	testData = session.query(*sel).\
-		filter(Animal.test_train == 'test').all()
+	# testData = session.query(*sel).\
+	# 	filter(Animal.test_train == 'test').all()
 
-	neuralNetwork = petfinderNeuralNetwork(trainData)
-	neuralNetwork.trainNetwork()
-	neuralNetwork.predict(testData)
+	# neuralNetwork = petfinderNeuralNetwork(trainData)
+	# neuralNetwork.trainNetwork()
+	# neuralNetwork.predict(testData)
 
 	session.close()
-	return "Hello"
-	#jsonify(data)
+	return jsonify(data)

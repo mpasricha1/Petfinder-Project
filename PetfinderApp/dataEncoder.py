@@ -5,11 +5,10 @@ class encoder:
 	def __init__(self, data):
 		self.data = data 
 
-	def parseAnimal(self,breeds, colors):
+	def encodeAnimal(self,breeds, colors, states):
 		newAnimals = []
 
 		for row in self.data["animals"]: 
-			print(row["type"][1])
 			animal = {}
 			
 			if row["type"] == "Dog":
@@ -17,7 +16,9 @@ class encoder:
 			else: 
 				animal["type"] = 2
 			animal["name"] = row["name"]
+			#Kristin taking care of
 			#animal["age"]
+			
 			for breed in breeds:
 				if row["breeds"]["primary"] == None:
 					animal["breed1"] = 0
@@ -38,17 +39,17 @@ class encoder:
 					animal["colors1"] = 0
 				else:
 					if row["colors"]["primary"] == color.color_name:
-						animal["color1"] = color.color_id
+						animal["color1"] = color.color_code
 				if row["colors"]["secondary"] == None:
 					animal["color2"] = 0
 				else:
 					if row["colors"]["secondary"] == color.color_name:
-						animal["color2"] = color.color_id
+						animal["color2"] = color.color_code
 				if row["colors"]["tertiary"] == None:
 					animal["color3"] = 0
 				else:
 					if row["colors"]["tertiary"] == color.color_name:
-						animal["color3"] = color.color_id
+						animal["color3"] = color.color_code
 			if row["size"] == None:
 				animal["maturitySize"] = 0
 			else:
@@ -88,15 +89,64 @@ class encoder:
 				animal["sterilized"] = 2
 			if row["attributes"]["spayed_neutered"] == None:
 				animal["sterilized"] = 3
-			#animal["health"]
+			if row["attributes"]["special_needs"] == True:
+				animal["health"] = 2 
+			if row["attributes"]["special_needs"] == False: 
+				animal["health"] = 1 
+			if row["attributes"]["special_needs"] == None: 
+				animal["health"] = 0 
 			animal["fee"] = 0
-			#animal["state"]
+			for state in states: 
+				if row["contact"]["address"]["state"] == state.state_name: 
+						animal["state"] = state.state_id
 			animal["orgId"] = row["organization_id"]
 			animal["videoAmt"] = len(row["videos"])
 			animal["description"] = row["description"]
 			animal["petid"] = row["id"]
 			animal["photoAmnt"] = len(row["photos"])
+			animal["testTrain"] = "train"
+			if len(row["photos"]) > 1:
+				animal["photo1small"] = row["photos"][0]["small"]
+				animal["photo1medium"] = row["photos"][0]["medium"]
+				animal["photo2small"] = row["photos"][1]["small"]
+				animal["photo2medium"] = row["photos"][1]["medium"]
+			elif len(row["photos"]) == 1:
+				animal["photo1small"] = row["photos"][0]["small"]
+				animal["photo1medium"] = row["photos"][0]["medium"]
+			animal["status"] = row["status"]
+			if row["attributes"]["house_trained"] == True:
+				animal["housetrained"] = 1
+			if row["attributes"]["house_trained"] == False:
+				animal["housetrained"] = 2
+			if row["attributes"]["house_trained"] == None:
+				animal["housetrained"] = 0
+			if row["attributes"]["declawed"] == True:
+				animal["declawed"] = 1
+			if row["attributes"]["declawed"] == False:
+				animal["declawed"] = 2
+			if row["attributes"]["declawed"] == None:
+				animal["declawed"] = 0
+			if row["environment"]["children"] == True:
+				animal["goodwithkids"] = 1
+			if row["environment"]["children"] == False:
+				animal["goodwithkids"] = 2
+			if row["environment"]["children"] == None:
+				animal["goodwithkids"] = 0
+			if row["environment"]["cats"] == True:
+				animal["goodwithcats"] = 1
+			if row["environment"]["cats"] == False:
+				animal["goodwithcats"] = 2
+			if row["environment"]["cats"] == None:
+				animal["goodwithcats"] = 0
+			if row["environment"]["dogs"] == True:
+				animal["goodwithdogs"]  = 1
+			if row["environment"]["dogs"] == False:
+				animal["goodwithdogs"]  = 2
+			if row["environment"]["dogs"] == None:
+				animal["goodwithdogs"]  = 0
 
+			animal["url"] = row["url"]
+ 
 			print(animal)
 			
  
