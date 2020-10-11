@@ -44,6 +44,18 @@ class dbConnector:
 
 		return states
 
+	def getPageCount(self, animalType):
+		if animalType == "dog": 
+			animalType = 1
+		else: 
+			animalType = 2
+		session = Session(self.engine)
+		pageCount = session.query(self.Animal.page).\
+							filter(self.Animal.type == animalType).\
+							order_by(self.Animal.id.desc()).first()
+		pageCount = pageCount[0]+1
+		return pageCount
+
 	def insertNewTrainData(self,data):
 		session = Session(self.engine)
 
@@ -61,15 +73,9 @@ class dbConnector:
 								   test_train=row["test_train"],photo1_small=row["photo1_small"], photo1_med=row["photo1_med"],
 								   photo2_small=row["photo2_small"], photo2_med=row["photo2_med"], status=row["status"], 
 								   housetrained=row["housetrained"], declawed=row["declawed"], good_with_kids=row["good_with_kids"],
-								   good_with_cats=row["good_with_cats"], good_with_dogs=row["good_with_dogs"], url=row["url"]
+								   good_with_cats=row["good_with_cats"], good_with_dogs=row["good_with_dogs"], url=row["url"], page=row["page"]
 								)
 			session.add(newAnimalData)
 			session.commit()
 			newId+=1
 
-		# newUserData = UserData(firstname=fName,lastname=lName,zipcode=zipcode, email=email, gender=gender,age=age,
-		# 						   income=income, favregion=region,favsport=sport,favalcohol=alcohol,fitness=fit, 
-		# 						   marijuanamedical=maryMed, marijuanarec=maryRec, unihealthcare=healthcare, hoursworked=hoursworked, 
-		# 						   gdppercap=gdppercapita, socialenv=social, lifechoices=lifechoices,generosity=generosity, govtrust=govTrust)
-		# 	session.add(newUserData)
-		# 	session.commit()
