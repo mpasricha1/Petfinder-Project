@@ -8,7 +8,8 @@ class encoder:
 	def encodeAnimal(self,breeds, colors, states):
 		newAnimals = []
 
-		for row in self.data["animals"]: 
+		for row in self.data["animals"]:
+			print(row) 
 			animal = {}
 			
 			if row["type"] == "Dog":
@@ -16,28 +17,24 @@ class encoder:
 			else: 
 				animal["type"] = 2
 			animal["name"] = row["name"]
-			#Kristin taking care of
-			#animal["age"]
 			if row["size"].lower() == "small" or row["size"].lower() == "medium":
 				if row["age"].lower() == "baby": 
-					animal["age"] == 12
+					animal["age"] = 12
 				elif row["age"].lower() == "young": 
-					animal["age"] == 3 * 12
+					animal["age"] = 3 * 12
 				elif row["age"].lower() == "adult": 
-					animal["age"] == 6 * 12
+					animal["age"] = 6 * 12
 				elif row["age"].lower() == "senior": 
-					animal["age"] == 10 * 12
+					animal["age"] = 10 * 12
 			elif row["size"].lower() == "large" or row["size"].lower() == "xlarge":
 			 	if row["age"].lower() == "baby":
-			 		animal["age"] == 18
+			 		animal["age"] = 18
 			 	elif row["age"].lower() == "young":
-			 		animal["age"] == 4 * 12
+			 		animal["age"] = 4 * 12
 			 	elif row["age"].lower() == "adult":
-			 		animal["age"] == 7 * 12
+			 		animal["age"] = 7 * 12
 			 	elif row["age"].lower() == "senior":
-			 		animal["age"] == 12 * 12
-			else: 
-				animal["age"] == 0
+			 		animal["age"] = 12 * 12
 			for breed in breeds:
 				if row["breeds"]["primary"] == None:
 					animal["breed1"] = 0
@@ -165,7 +162,10 @@ class encoder:
 				animal["goodwithdogs"]  = 0
 			animal["url"] = row["url"]
  
+			newAnimals.append(animal)
 			print(animal)
+
+		return newAnimals
 			
  
 		
