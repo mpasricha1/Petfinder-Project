@@ -4,7 +4,7 @@ from dataEncoder import encoder
 
 def apiThread(clientID, clientSecret,tokenURL,db, animalType):
 	recordCount = 0
-	pageCount = 1
+	pageCount = 100
 	breeds = db.breedsList() 
 	colors = db.colorsList()
 	states = db.statesList()
@@ -13,8 +13,7 @@ def apiThread(clientID, clientSecret,tokenURL,db, animalType):
 	token = authenticator.generateAccessToken()
 	data = authenticator.callAPI(token,pageCount, animalType)
 	dataEncoder = encoder(data)
-	dataEncoder.encodeAnimal(breeds, colors, states)
-
+	encodedData = dataEncoder.encodeAnimal(breeds, colors, states)
 
 	# while True:
 	# 	if recordCount < 1000:

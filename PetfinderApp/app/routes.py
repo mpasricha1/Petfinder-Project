@@ -1,9 +1,5 @@
 from flask import render_template, request, redirect, session, url_for
 from flask.json import jsonify
-from sqlalchemy.ext.automap import automap_base 
-from sqlalchemy.ext.declarative import declarative_base 
-from sqlalchemy import create_engine, and_
-from sqlalchemy.orm import Session
 import config
 import threading
 import time
@@ -29,14 +25,8 @@ clientSecret5 = config.SECRET_KEY_5
 
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
-<<<<<<< HEAD
-engine = create_engine(f"postgresql+psycopg2://postgres:Monti2020!!@localhost/adoption_db")
-Base = automap_base()
-Base.prepare(engine,reflect=True)
-=======
 db = dbConnector()
 db.establishConnection()
->>>>>>> 2cbbfdc1e9148d4b457acee8a5c3b8221fac1400
 
 # sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
 # 		Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
@@ -63,7 +53,19 @@ def getdata():
 	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog"))
 	x.start()
 
-	# y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, breeds, colors, states, "cat"))
-	# y.start()
+	y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, breeds, colors, states, "cat"))
+	y.start()
 
 	return "Test"
+
+@app.route('/tool')
+def tool(methods=["POST"]):
+	return render_template("tool.html")
+
+@app.route("/analytics")
+def analytics():
+	return render_template("analytics.html")
+
+@app.route("/howitworks")
+def howitworks(): 
+	return render_template("howitworks.html")
