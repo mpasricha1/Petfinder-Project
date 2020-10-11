@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 import config
 import threading
 import time
-
+from dbConnector import dbConnector
 from neuralNetwork import petfinderNeuralNetwork
 from tasks import apiThread
 from app import app 
@@ -29,16 +29,9 @@ clientSecret5 = config.SECRET_KEY_5
 
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
-engine = create_engine(f"postgresql+psycopg2://postgres:postgres@localhost/adoption_db")
-Base = automap_base()
-Base.prepare(engine,reflect=True)
+db = dbConnector()
+db.establishConnection()
 
-Animal = Base.classes.animal
-Breed = Base.classes.breed
-Color = Base.classes.color
-State = Base.classes.state 
-
-# session = Session(engine)
 # sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
 # 		Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
 # 		Animal.dewormed, Animal.sterilized, Animal.health, Animal.fee, Animal.adoption_speed ]
@@ -49,8 +42,6 @@ State = Base.classes.state
 # neuralNetwork = petfinderNeuralNetwork(trainData)
 # neuralNetwork.trainNetwork()
 
-# session.close()
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -58,23 +49,15 @@ def index():
 	# testData = session.query(*sel).\
 	# 					filter(Animal.test_train == 'test').all()
 	# neuralNetwork.predict(testData)
+	
 	return render_template("index.html")
 
 @app.route('/getdata')
 def getdata():
-	session = Session(engine)
-	moreData = True
-	currentPage = 10
-
-	breeds = session.query(Breed.breed_id, Breed.breed_name).all()
-	colors = session.query(Color.color_code, Color.color_name).all()
-	states = session.query(State.state_id, State.state_name)
-
-	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, breeds, colors, states, "dog"))
+	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog"))
 	x.start()
 
-	y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, breeds, colors, states, "cat"))
-	y.start()
+	# y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, breeds, colors, states, "cat"))
+	# y.start()
 
-	session.close()
-	return "TestS"
+	return "Test"

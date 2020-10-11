@@ -8,7 +8,8 @@ class encoder:
 	def encodeAnimal(self,breeds, colors, states):
 		newAnimals = []
 
-		for row in self.data["animals"]: 
+		for row in self.data["animals"]:
+			print(row) 
 			animal = {}
 			
 			if row["type"] == "Dog":
@@ -34,8 +35,6 @@ class encoder:
 			 		animal["age"] = 7 * 12
 			 	elif row["age"].lower() == "senior":
 			 		animal["age"] = 12 * 12
-			else: 
-				animal["age"] == 0
 			for breed in breeds:
 				if row["breeds"]["primary"] == None:
 					animal["breed1"] = 0
@@ -164,6 +163,7 @@ class encoder:
 			animal["url"] = row["url"]
  
 			newAnimals.append(animal)
+			print(animal)
 
 		return newAnimals
 			
