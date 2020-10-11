@@ -5,10 +5,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, and_
 from sqlalchemy.orm import Session
 import config
+import threading
 import time
 from OAuth2 import PetfinderAPI
 from dataEncoder import encoder
 from neuralNetwork import petfinderNeuralNetwork
+from tasks import apiThread
 from app import app 
 
 clientID1 = config.API_KEY_1
@@ -39,7 +41,7 @@ State = Base.classes.state
 
 @app.route('/')
 @app.route('/index')
-def index(): 
+def index():
 	return render_template("index.html")
 
 @app.route('/getdata')
@@ -52,13 +54,12 @@ def getdata():
 	colors = session.query(Color.color_code, Color.color_name).all()
 	states = session.query(State.state_id, State.state_name)
 
-	authenticator = PetfinderAPI(clientID5, clientSecret5, tokenURL)
+	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL,1, breeds, colors, states))
+	x.start()
 
-	token = authenticator.generateAccessToken()
-	data = authenticator.callAPI(token,currentPage, "dog")
-
-	dataEncoder = encoder(data)
-	dataEncoder.encodeAnimal(breeds, colors, states)
+	y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL,2, breeds, colors, states))
+	y.start()
+	
 
 	# sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
 	# 	   Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
@@ -75,4 +76,4 @@ def getdata():
 	# neuralNetwork.predict(testData)
 
 	session.close()
-	return jsonify(data)
+	return "TestS"

@@ -20,22 +20,22 @@ class encoder:
 			#animal["age"]
 			if row["size"].lower() == "small" or row["size"].lower() == "medium":
 				if row["age"].lower() == "baby": 
-					animal["age"] == 12
+					animal["age"] = 12
 				elif row["age"].lower() == "young": 
-					animal["age"] == 3 * 12
+					animal["age"] = 3 * 12
 				elif row["age"].lower() == "adult": 
-					animal["age"] == 6 * 12
+					animal["age"] = 6 * 12
 				elif row["age"].lower() == "senior": 
-					animal["age"] == 10 * 12
+					animal["age"] = 10 * 12
 			elif row["size"].lower() == "large" or row["size"].lower() == "xlarge":
 			 	if row["age"].lower() == "baby":
-			 		animal["age"] == 18
+			 		animal["age"] = 18
 			 	elif row["age"].lower() == "young":
-			 		animal["age"] == 4 * 12
+			 		animal["age"] = 4 * 12
 			 	elif row["age"].lower() == "adult":
-			 		animal["age"] == 7 * 12
+			 		animal["age"] = 7 * 12
 			 	elif row["age"].lower() == "senior":
-			 		animal["age"] == 12 * 12
+			 		animal["age"] = 12 * 12
 			else: 
 				animal["age"] == 0
 			for breed in breeds:
