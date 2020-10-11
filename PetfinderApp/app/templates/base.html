@@ -5,7 +5,7 @@
 	{% if title %}
 	<title>{{ title }}</title>
 	{% else %}
-	<title>Homepage</title>
+	<title>M2K, Inc. Homepage</title>
 	{% endif %}
 	
 	<link rel="stylesheet" href="resources/styles.css">
@@ -41,9 +41,9 @@
 	   
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav navbar-right">
-			<li><a target="_blank" href="{{ url_for('howitworks') }}">How it Works</a></li>
-	      	<li><a target="_blank" href="{{ url_for('analytics') }}">Analytics</a></li>
-	      	<li><a target="_blank" href="{{ url_for('tool') }}">Tool</a></li>
+			<li><a target="_self" href="{{ url_for('howitworks') }}">How it Works</a></li>
+	      	<li><a target="_self" href="{{ url_for('analytics') }}">Analytics</a></li>
+	      	<li><a target="_self" href="{{ url_for('tool') }}">Tool</a></li>
 		      <li class="dropdown">
 		        <a class="dropdown-toggle" data-toggle="dropdown" href=#>All Things PetFinder <span class="caret"></span></a>
 		        	<ul class="dropdown-menu">
