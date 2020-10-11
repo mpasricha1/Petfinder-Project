@@ -7,8 +7,7 @@ from sqlalchemy.orm import Session
 import config
 import threading
 import time
-from OAuth2 import PetfinderAPI
-from dataEncoder import encoder
+
 from neuralNetwork import petfinderNeuralNetwork
 from tasks import apiThread
 from app import app 
@@ -39,9 +38,26 @@ Breed = Base.classes.breed
 Color = Base.classes.color
 State = Base.classes.state 
 
+# session = Session(engine)
+# sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
+# 		Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
+# 		Animal.dewormed, Animal.sterilized, Animal.health, Animal.fee, Animal.adoption_speed ]
+
+# trainData = session.query(*sel).\
+# 	filter(Animal.test_train == 'train').all()
+
+# neuralNetwork = petfinderNeuralNetwork(trainData)
+# neuralNetwork.trainNetwork()
+
+# session.close()
+
 @app.route('/')
 @app.route('/index')
 def index():
+	# session = Session(engine)
+	# testData = session.query(*sel).\
+	# 					filter(Animal.test_train == 'test').all()
+	# neuralNetwork.predict(testData)
 	return render_template("index.html")
 
 @app.route('/getdata')
@@ -54,26 +70,11 @@ def getdata():
 	colors = session.query(Color.color_code, Color.color_name).all()
 	states = session.query(State.state_id, State.state_name)
 
-	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL,1, breeds, colors, states))
+	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, breeds, colors, states, "dog"))
 	x.start()
 
-	y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL,2, breeds, colors, states))
+	y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, breeds, colors, states, "cat"))
 	y.start()
-	
-
-	# sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
-	# 	   Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
-	# 	   Animal.dewormed, Animal.sterilized, Animal.health, Animal.fee, Animal.adoption_speed ]
-
-	# trainData = session.query(*sel).\
-	# 	   filter(Animal.test_train == 'train').all()
-
-	# testData = session.query(*sel).\
-	# 	filter(Animal.test_train == 'test').all()
-
-	# neuralNetwork = petfinderNeuralNetwork(trainData)
-	# neuralNetwork.trainNetwork()
-	# neuralNetwork.predict(testData)
 
 	session.close()
 	return "TestS"

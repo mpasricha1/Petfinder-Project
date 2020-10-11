@@ -16,8 +16,6 @@ class encoder:
 			else: 
 				animal["type"] = 2
 			animal["name"] = row["name"]
-			#Kristin taking care of
-			#animal["age"]
 			if row["size"].lower() == "small" or row["size"].lower() == "medium":
 				if row["age"].lower() == "baby": 
 					animal["age"] = 12
@@ -165,7 +163,9 @@ class encoder:
 				animal["goodwithdogs"]  = 0
 			animal["url"] = row["url"]
  
-			print(animal)
+			newAnimals.append(animal)
+
+		return newAnimals
 			
  
 		
