@@ -38,7 +38,7 @@ class PetfinderAPI:
 	    	"page": f"{page}",
 	    	"status": "adoptable", 
 	    	"type" : f"{type}", 
-	    	"special_needs" = True
+	    	"special_needs": True
 
 		}
 		# r = requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params)

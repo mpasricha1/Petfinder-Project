@@ -11,9 +11,10 @@ def apiThread(clientID, clientSecret,tokenURL,db, animalType):
 
 	authenticator = PetfinderAPI(clientID, clientSecret, tokenURL)
 	token = authenticator.generateAccessToken()
-	data = authenticator.callAPI(token,pageCount, animalType)
+	data = authenticator.callAPIAdopted(token,pageCount, animalType)
 	dataEncoder = encoder(data)
 	encodedData = dataEncoder.encodeAnimal(breeds, colors, states)
+	db.insertNewTrainData(encodedData)
 
 	# while True:
 	# 	if recordCount < 1000:
