@@ -18,7 +18,26 @@ class encoder:
 			animal["name"] = row["name"]
 			#Kristin taking care of
 			#animal["age"]
-			
+			if row["size"].lower() == "small" or row["size"].lower() == "medium":
+				if row["age"].lower() == "baby": 
+					animal["age"] == 12
+				if row["age"].lower() == "young": 
+					animal["age"] == 3 * 12
+				if row["age"].lower() == "adult": 
+					animal["age"] == 6 * 12
+				if row["age"].lower() == "senior": 
+					animal["age"] == 10 * 12
+			elif row["size"].lower() == "large" or row["size"].lower() == "xlarge":
+			 	if row["age"].lower() == "baby":
+			 		animal["age"] == 18
+			 	elif row["age"].lower() == "young":
+			 		animal["age"] == 4 * 12
+			 	elif row["age"].lower() == "adult":
+			 		animal["age"] == 7 * 12
+			 	elif row["age"].lower() == "senior":
+			 		animal["age"] == 12 * 12
+			else: 
+				animal["age"] == 0
 			for breed in breeds:
 				if row["breeds"]["primary"] == None:
 					animal["breed1"] = 0
@@ -58,24 +77,24 @@ class encoder:
 				else:
 					if row["size"].lower() == "small": 
 						animal["maturitySize"] = 1
-					if row["size"].lower() == "medium":
+					elif row["size"].lower() == "medium":
 						animal["maturitySize"] = 2 
-					if row["size"].lower() == "large": 
+					elif row["size"].lower() == "large": 
 							animal["maturitySize"] = 3
-					if row["size"].lower() == "xlarge": 
+					elif row["size"].lower() == "xlarge": 
 						animal["maturitySize"] = 4
 			if row["coat"] == None: 
 				animal["furLength"] = 0
 			else:
 				if row["coat"].lower() == "short":
 					animal["furLength"] = 1 
-				if row["coat"].lower() == "medium": 
+				elif row["coat"].lower() == "medium": 
 					animal["furLength"] = 2
-				if row["coat"].lower() == "long": 
+				elif row["coat"].lower() == "long": 
 					animal["furLength"] = 3 
-				if row["coat"].lower() == "wire":
+				elif row["coat"].lower() == "wire":
 					animal["furLength"] = 4
-				if row["coat"].lower() == "hairless": 
+				elif row["coat"].lower() == "hairless": 
 					animal["furLength"] = 5
 			if row["attributes"]["shots_current"] == True:
 				animal["vaccinated"] = 1
@@ -144,7 +163,6 @@ class encoder:
 				animal["goodwithdogs"]  = 2
 			if row["environment"]["dogs"] == None:
 				animal["goodwithdogs"]  = 0
-
 			animal["url"] = row["url"]
  
 			print(animal)
