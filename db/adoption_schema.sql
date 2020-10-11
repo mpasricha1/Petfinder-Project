@@ -18,11 +18,11 @@ CREATE TABLE "animal" (
     "furlength" INT,
     "vaccinated" INT,
     "dewormed" INT,
-    "sterlized" INT,
+    "sterilized" INT,
     "health" INT,
     "quantity" INT,
     "fee" INT,
-    "state" INT,
+    "state_name" INT,
     "rescuer_id" varchar,
     "video_amt" INT,
     "description" varchar,
@@ -30,10 +30,22 @@ CREATE TABLE "animal" (
     "photo_amt" INT,
     "adoption_speed" INT,
 	"test_train" varchar,
+	"photo1_small" text,
+	"photo1_med" text,
+	"photo2_small" text,
+	"photo2_med" text,
+	"status" varchar,
+	"housetrained" INT,
+	"declawed" INT,
+	"good_with_kids" INT,
+	"good_with_cats" INT,
+	"good_with_dogs" INT,
+	"url" text,
     CONSTRAINT "pk_animal" PRIMARY KEY (
         "id"
      )
 );
+
 
 CREATE TABLE "breed" (
     "breed_id" INT   NOT NULL,
@@ -45,10 +57,11 @@ CREATE TABLE "breed" (
 );
 
 CREATE TABLE "color" (
-    "color_id" INT   NOT NULL,
+	"id" INT NOT NULL,
+    "color_code" INT   NOT NULL,
     "color_name" varchar   NOT NULL,
 	CONSTRAINT "pk_color" PRIMARY KEY (
-        "color_id"
+        "id"
      )
 );
 
@@ -67,13 +80,13 @@ ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_breed2" FOREIGN KEY("breed2")
 REFERENCES "breed" ("breed_id");
 
 ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_color1" FOREIGN KEY("color1")
-REFERENCES "color" ("color_id");
+REFERENCES "color" ("id");
 
 ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_color2" FOREIGN KEY("color2")
-REFERENCES "color" ("color_id");
+REFERENCES "color" ("id");
 
 ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_color3" FOREIGN KEY("color3")
-REFERENCES "color" ("color_id");
+REFERENCES "color" ("id");
 
-ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_state" FOREIGN KEY("state")
+ALTER TABLE "animal" ADD CONSTRAINT "fk_animal_state" FOREIGN KEY("state_name")
 REFERENCES "state" ("state_id");
