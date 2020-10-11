@@ -53,7 +53,7 @@ def getdata():
 	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog"))
 	x.start()
 
-	y = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, breeds, colors, states, "cat"))
+	y = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "cat"))
 	y.start()
 
 	return "Test"
