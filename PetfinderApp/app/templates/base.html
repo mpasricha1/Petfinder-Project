@@ -8,15 +8,60 @@
 	<title>Homepage</title>
 	{% endif %}
 	
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="resources/styles.css">
+	<link rel="stylesheet" type="text/css" href="<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+	<script src="https://d3js.org/d3.v5.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
 
     <!-- <link rel="stylesheet" type="text/css" href="static/css/style.css"> -->
 <body>
 
-	<div id="content">{% block content %}{% endblock %}</div>
+<!--TOP NAVIGATION BAR##########################################################-->
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a class="navbar-brand" href="Web-Design-Challenge.html">M2K, Inc.</a>
+	    </div>
+	   
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      <ul class="nav navbar-nav navbar-right">
+			<li><a target="_blank" href="ml.html">How it Works</a></li>
+	      	<li><a target="_blank" href="analytics.html">Analytics</a></li>
+	      	<li><a target="_blank" href="tool.html">Tool</a></li>
+		      <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href=#>All Things PetFinder <span class="caret"></span></a>
+		        	<ul class="dropdown-menu">
+						<li><a target="_blank" href="www.petfinder.com">PetFinder.com</a></li>
+		          		<li><a target="_blank" href="https://twitter.com/petfinder">Twitter</a></li>
+		          		<li><a target="_blank" href="https://www.facebook.com/Petfinder/">FaceBook</a></li>
+		          		<li><a target="_blank" href="https://petfinderfoundation.com/">PetFinder Foundation</a></li>
+		          	</ul>
+		      </li>
+	      </ul>
+
+	    </div>
+	  </div>
+	</nav>
+
+
+<div id="content">{% block content %}{% endblock %}</div>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

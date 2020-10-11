@@ -1,0 +1,105 @@
+/*STYLES FOR WEB-DESIGN-CHALLENGE HOMEWORK*/
+
+/* Giving the body the specified background color, adding font sizes for the h1 and h3 elements we'll be using */
+body {
+  background: #f1f1f1;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 60px;
+  font-weight: bold;
+
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h5 {
+  font-size: 15px;
+}
+
+/* Giving our navbar some padding and a background color (CADET BLUE) */
+.navbar {
+  padding: 3px;
+  background: #5F9EA0;
+  /*color: #000;*/
+}
+
+/* Making our navbar li's inline-block elements this makes it so we can have multiple on the same line. */
+.navbar li {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.navbar-brand {
+  /*color: #2F4F4F;*/
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 60px;
+  font: Georgia;  
+}
+.navbar li a {
+  color: #2F4F4F;
+  text-decoration: none;
+}
+
+
+/* Table formatting */
+td {
+  /*padding: 5px;*/
+  text-align: left;
+}
+
+th {
+  /*padding: 5px;*/
+  text-align: center;
+  font-weight: bold;
+
+}
+
+
+/* Styling the header, giving it a height, a background color, and some top padding */
+.header {
+  height: 200px;
+  padding-top: 20px;
+  background: #cdcdcd;
+}
+
+/* Centering our h1 tag inside our header, giving it a little padding, removing its margin */
+.header h1 {
+  padding: 60px;
+  margin: 0;
+  color: #000;
+  text-align: center;
+}
+
+/* Giving the .post element margin on 3 sides */
+.post {
+  margin-top: 50px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+/* Styling the footer, giving it a height, a background color, and some top padding */
+.footer {
+  height: 30px;
+  width: 100%;
+  padding-top: .5px;
+  padding-bottom: .5px;
+  /*background: #cdcdcd;*/
+  text-align: center;
+  bottom: 0;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}

@@ -28,7 +28,7 @@ clientSecret5 = config.SECRET_KEY_5
 
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
-engine = create_engine(f"postgresql+psycopg2://postgres:postgres@localhost/adoption_db")
+engine = create_engine(f"postgresql+psycopg2://postgres:Monti2020!!@localhost/adoption_db")
 Base = automap_base()
 Base.prepare(engine,reflect=True)
 
