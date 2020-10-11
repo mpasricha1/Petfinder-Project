@@ -21,11 +21,11 @@ class encoder:
 			if row["size"].lower() == "small" or row["size"].lower() == "medium":
 				if row["age"].lower() == "baby": 
 					animal["age"] == 12
-				if row["age"].lower() == "young": 
+				elif row["age"].lower() == "young": 
 					animal["age"] == 3 * 12
-				if row["age"].lower() == "adult": 
+				elif row["age"].lower() == "adult": 
 					animal["age"] == 6 * 12
-				if row["age"].lower() == "senior": 
+				elif row["age"].lower() == "senior": 
 					animal["age"] == 10 * 12
 			elif row["size"].lower() == "large" or row["size"].lower() == "xlarge":
 			 	if row["age"].lower() == "baby":

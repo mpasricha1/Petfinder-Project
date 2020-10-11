@@ -19,6 +19,13 @@ clientSecret2 = config.SECRET_KEY_2
 
 clientID3 = config.API_KEY_3
 clientSecret3 = config.SECRET_KEY_3
+
+clientID4 = config.API_KEY_4
+clientSecret4 = config.SECRET_KEY_4
+
+clientID5 = config.API_KEY_5
+clientSecret5 = config.SECRET_KEY_5
+
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
 engine = create_engine(f"postgresql+psycopg2://postgres:postgres@localhost/adoption_db")
@@ -45,8 +52,7 @@ def getdata():
 	colors = session.query(Color.color_code, Color.color_name).all()
 	states = session.query(State.state_id, State.state_name)
 
-	authenticator = PetfinderAPI(clientID1, clientSecret1, tokenURL)
-	authenticator2 = PetfinderAPI(clientID2, clientSecret2, tokenURL)
+	authenticator = PetfinderAPI(clientID5, clientSecret5, tokenURL)
 
 	token = authenticator.generateAccessToken()
 	data = authenticator.callAPI(token,currentPage, "dog")
