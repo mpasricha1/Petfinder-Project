@@ -23,43 +23,39 @@ clientSecret4 = config.SECRET_KEY_4
 clientID5 = config.API_KEY_5
 clientSecret5 = config.SECRET_KEY_5
 
+clientID5 = config.API_KEY_6
+clientSecret5 = config.SECRET_KEY_6
+
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
 db = dbConnector()
 db.establishConnection()
 
-# sel = [Animal.type, Animal.age, Animal.breed1, Animal.breed2, Animal.gender, Animal.color1,
-# 		Animal.color2, Animal.color3, Animal.maturity_size, Animal.furlength, Animal.vaccinated, 
-# 		Animal.dewormed, Animal.sterilized, Animal.health, Animal.fee, Animal.adoption_speed ]
-
-# trainData = session.query(*sel).\
-# 	filter(Animal.test_train == 'train').all()
-
-# neuralNetwork = petfinderNeuralNetwork(trainData)
-# neuralNetwork.trainNetwork()
+trainData = db.getNeuralNetworkData()
+neuralNetwork = petfinderNeuralNetwork(trainData)
+neuralNetwork.trainNetwork()
 
 @app.route('/')
 @app.route('/index')
 def index():
-	# session = Session(engine)
-	# testData = session.query(*sel).\
-	# 					filter(Animal.test_train == 'test').all()
-	# neuralNetwork.predict(testData)
+	
+	testData = db.getTestData()
+	print(neuralNetwork.predict(testData))
 	
 	return render_template("index.html")
 
 @app.route('/getdata')
 def getdata():
-	x = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog"))
+	x = threading.Thread(target=apiThread, args=(clientID5, clientSecret5, tokenURL, db, "dog"))
 	x.start()
 
-	y = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "cat"))
+	y = threading.Thread(target=apiThread, args=(clientID6, clientSecret6, tokenURL, db, "cat"))
 	y.start()
 
 	return "Test"
 
 @app.route('/tool')
-def tool(methods=["POST"]):
+def tool(methods=["GET","POST"]):
 	return render_template("tool.html")
 
 @app.route("/analytics")

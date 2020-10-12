@@ -18,6 +18,8 @@ class petfinderNeuralNetwork:
 		df = df.dropna(axis="columns", how="all")
 		df.dropna()
 
+		print(df)
+
 		X = df[["type", "age", "breed1", "breed2", "gender", "color1",
 		      "color2", "color3", "maturity_size", "furlength", "vaccinated", 
 		      "dewormed", "sterilized", "health", "fee"]]

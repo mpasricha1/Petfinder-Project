@@ -79,3 +79,25 @@ class dbConnector:
 			session.commit()
 			newId+=1
 
+	def getNeuralNetworkData(self):
+		session = Session(self.engine)
+
+		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
+			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
+			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
+
+		trainData = session.query(*sel).\
+				filter(self.Animal.test_train == 'train').all()
+
+		session.close()
+		return trainData
+
+	def getTestData(self):
+		session = Session(self.engine)
+
+		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
+			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
+			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
+		testData = session.query(*sel).\
+						filter(self.Animal.test_train == 'test').all()
+

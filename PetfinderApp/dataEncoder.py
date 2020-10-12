@@ -10,14 +10,19 @@ class encoder:
 		newAnimals = []
 
 		for row in self.data["animals"]:
-			animal = {}
+			animal = {"breed1": None, 
+					  "breed2": None, 
+					  "color1": None, 
+					  "color2": None, 
+					  "color3": None, 
+					  "state_name": 51}
+
 
 			if row["type"] == "Dog":
 				animal["type"] = 1
 			else: 
 				animal["type"] = 2
 			animal["name"] = row["name"]
-			print(f"Inserting Age {row['age']}")
 			if row["size"].lower() == "small" or row["size"].lower() == "medium":
 				if row["age"].lower() == "baby": 
 					animal["age"] = 12
@@ -40,47 +45,43 @@ class encoder:
 			 		animal["age"] = 12 * 12
 			 	else: 
 			 		animal["age"] = 0
-			for breed in breeds:
-				if row["breeds"]["primary"] == None:
-					animal["breed1"] = 308
-				else:
-					if row["breeds"]["primary"] == breed.breed_name: 
+			if row["breeds"]["primary"] == None:
+				animal["breed1"] = 308
+			else:
+				for breed in breeds:
+					if row["breeds"]["primary"].lower() == breed.breed_name.lower():
 						animal["breed1"] = breed.breed_id
-					else:
-						animal["breed1"] = 308
-				if row["breeds"]["secondary"] == None:
- 					animal["breed2"] = 308
-				else:
-					if row["breeds"]["secondary"] == breed.breed_name:
+
+			if row["breeds"]["secondary"] == None:
+ 				animal["breed2"] = 308
+			else:
+				for breed in breeds:
+					if row["breeds"]["secondary"].lower() == breed.breed_name.lower():
 						animal["breed2"] = breed.breed_id
-					else:
-						animal["breed2"] = 308
-			if row["gender"].lower() == "Male":
+			if row["gender"].lower() == "male":
 				animal["gender"] = 1 
 			else: 
 				animal["gender"] = 2
-			for color in colors: 
-				if row["colors"]["primary"] == None:
-					animal["color1"] = 49
-				else:
-					if row["colors"]["primary"] == color.color_name:
+			if row["colors"]["primary"] == None:
+				animal["color1"] = 49
+			else:
+				for color in colors:
+					if row["colors"]["primary"].lower() == color.color_name.lower():
 						animal["color1"] = color.color_code
-					else:
-						animal["color1"] = 49
-				if row["colors"]["secondary"] == None:
-					animal["color2"] = 49
-				else:
-					if row["colors"]["secondary"] == color.color_name:
+
+			if row["colors"]["secondary"] == None:
+				animal["color2"] = 49
+			else:
+				for color in colors:
+					if row["colors"]["secondary"].lower() == color.color_name.lower():
 						animal["color2"] = color.color_code
-					else:
-						animal["color2"] = 49
-				if row["colors"]["tertiary"] == None:
-					animal["color3"] = 49
-				else:
-					if row["colors"]["tertiary"] == color.color_name:
+
+			if row["colors"]["tertiary"] == None:
+				animal["color3"] = 49
+			else:
+				for color in colors:
+					if row["colors"]["tertiary"].lower() == color.color_name.lower():
 						animal["color3"] = color.color_code
-					else:
-						animal["color3"] = 49
 			if row["size"] == None:
 				animal["maturity_size"] = 0
 			else:
@@ -130,10 +131,9 @@ class encoder:
 			animal["quantity"] = 1
 			animal["fee"] = 0
 			for state in states: 
-				if row["contact"]["address"]["state"] == state.state_name: 
+				if row["contact"]["address"]["state"].lower() == state.state_name.lower(): 
+						print("Match Found")
 						animal["state_name"] = state.state_id
-				else: 
-					animal["state_name"] = 51
 			animal["rescuer_id"] = row["organization_id"]
 			animal["video_amt"] = len(row["videos"])
 			animal["description"] = row["description"]
@@ -202,8 +202,11 @@ class encoder:
 				animal["good_with_dogs"]  = 0
 			animal["url"] = row["url"]
 			animal["page"] = pageCount
+
+			print(animal)
   
 			newAnimals.append(animal)
+			
 
 		return newAnimals
 			
