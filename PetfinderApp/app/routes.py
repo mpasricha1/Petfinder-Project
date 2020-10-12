@@ -31,9 +31,9 @@ tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 db = dbConnector()
 db.establishConnection()
 
-trainData = db.getNeuralNetworkData()
-neuralNetwork = petfinderNeuralNetwork(trainData)
-neuralNetwork.trainNetwork()
+# trainData = db.getNeuralNetworkData()
+# neuralNetwork = petfinderNeuralNetwork(trainData)
+# neuralNetwork.trainNetwork()
 
 @app.route('/')
 @app.route('/index')
@@ -46,11 +46,23 @@ def index():
 
 @app.route('/getdata')
 def getdata():
-	x = threading.Thread(target=apiThread, args=(clientID5, clientSecret5, tokenURL, db, "dog"))
-	x.start()
+	x1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog"))
+	x1.start()
 
-	y = threading.Thread(target=apiThread, args=(clientID6, clientSecret6, tokenURL, db, "cat"))
-	y.start()
+	x2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, db, "dog"))
+	x2.start()
+
+	x3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog"))
+	x3.start()
+
+	y1 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat"))
+	y1.start()
+
+	y2 = threading.Thread(target=apiThread, args=(clientID5, clientSecret5, tokenURL, db, "cat"))
+	y2.start()
+
+	y3 = threading.Thread(target=apiThread, args=(clientID6, clientSecret6, tokenURL, db, "cat"))
+	y3.start()
 
 	return "Test"
 
