@@ -14,7 +14,8 @@ class encoder:
 					  "breed2": None, 
 					  "color1": None, 
 					  "color2": None, 
-					  "color3": None, 
+					  "color3": None,
+					  "age": None, 
 					  "state_name": 51}
 
 
@@ -96,6 +97,8 @@ class encoder:
 							animal["maturity_size"] = 3
 					elif row["size"].lower() == "xlarge": 
 						animal["maturity_size"] = 4
+					else: 
+						animal["maturity_size"] = 0
 			if row["coat"] == None: 
 				animal["furlength"] = 0
 			else:
@@ -109,6 +112,8 @@ class encoder:
 					animal["furlength"] = 4
 				elif row["coat"].lower() == "hairless": 
 					animal["furLlength"] = 5
+				else:
+					animal["furlength"] = 0
 			if row["attributes"]["shots_current"] == True:
 				animal["vaccinated"] = 1
 			elif row["attributes"]["shots_current"] == False:

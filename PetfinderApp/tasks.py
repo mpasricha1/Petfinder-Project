@@ -31,7 +31,7 @@ def apiThread(clientID, clientSecret,tokenURL,db, animalType):
 				dataEncoder = encoder(data)
 				encodedData = dataEncoder.encodeAnimal(breeds, colors, states, pageCount)
 				db.insertNewTrainData(encodedData)
-				sleep(2)
+				sleep(.10)
 				
 			except:
 				print("Error skipping page")

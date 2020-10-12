@@ -23,8 +23,8 @@ clientSecret4 = config.SECRET_KEY_4
 clientID5 = config.API_KEY_5
 clientSecret5 = config.SECRET_KEY_5
 
-clientID5 = config.API_KEY_6
-clientSecret5 = config.SECRET_KEY_6
+clientID6 = config.API_KEY_6
+clientSecret6 = config.SECRET_KEY_6
 
 tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 
@@ -39,8 +39,8 @@ neuralNetwork.trainNetwork()
 @app.route('/index')
 def index():
 	
-	testData = db.getTestData()
-	print(neuralNetwork.predict(testData))
+	# testData = db.getTestData()
+	# neuralNetwork.predict(testData)
 	
 	return render_template("index.html")
 
