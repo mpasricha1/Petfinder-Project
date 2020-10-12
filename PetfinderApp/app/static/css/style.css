@@ -43,19 +43,27 @@ body {
   margin: 0;
 }
 
-/* This CSS styles the ufo icon in the navbar */
-.nav-ufo {
-  position: absolute;
-  bottom: 5px;
-  left: 150px;
-  width: 35px;
-  color: white;
+/* Card Image size */
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }
 
-/* Adding styles to the aside and filter form */
-.ufo-form {
-  margin-top: 50px;
+.card {
+    border: 1px solid #ccc;
+    background-color: #4B0082;
+    padding: 20px;
+    margin-bottom: 10px;
 }
+
+.cardQuote {
+    border: 1px solid #ccc;
+    background-color: #1E90FF;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
 
 .filters .panel-body {
   padding: 0;
