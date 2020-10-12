@@ -113,7 +113,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 			     	<label for="breed1">Primary Breed</label>
-			    	<select class="form-control" id="breed" name="breed1">
+			    	<select class="form-control" id="breed" name="breed1" onchange="optionChanged(this.value)">
 			      		<option>INSERT BREED DROPDOWN</option>
 			    	</select>
 				</div>
@@ -226,5 +226,6 @@
 </div>
 <br>
 
-<!-- </form> -->
+
+</form>
 {% endblock %}
