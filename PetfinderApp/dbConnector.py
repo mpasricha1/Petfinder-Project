@@ -13,7 +13,7 @@ class dbConnector:
 		self.State = ""
 
 	def establishConnection(self):
-		self.engine = create_engine(f"postgresql+psycopg2://postgres:swf24R!@localhost/adoption_db")
+		self.engine = create_engine(f"postgresql+psycopg2://postgres:postgres@localhost/adoption_db")
 		self.Base = automap_base()
 		self.Base.prepare(self.engine,reflect=True)
 		self.Animal = self.Base.classes.animal
