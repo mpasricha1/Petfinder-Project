@@ -43,9 +43,14 @@ def index():
 	testData = db.getTestData()
 	proccessedData = neuralNetwork.predict(testData)
 
-	for row in proccessedData:
-		maxIndexColumn = np.argmax(row, axis=0)
-		print(maxIndexColumn)
+	for i,j in zip(proccessedData, testData):
+		id = j[0]
+		score = maxIndexColumn = np.argmax(i, axis=0)
+		print(id)
+		print(score)
+		print("")
+		
+		#print(maxIndexColumn)
 
 	
 	return render_template("index.html")
