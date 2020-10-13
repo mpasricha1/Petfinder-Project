@@ -5,7 +5,7 @@ import threading
 import time
 from dbConnector import dbConnector
 # from neuralNetwork import petfinderNeuralNetwork
-from tasks import apiThread
+from tasks import apiThread, apiSearchAnimal
 from app import app 
 
 clientID1 = config.API_KEY_1
@@ -59,9 +59,6 @@ def getdata():
 
 @app.route('/tool', methods=["GET","POST"])
 def tool():
-	if request.method == "POST":
-		emprequest.form.get("inputEmpID")
-
 	return render_template("tool2.html")
 
 @app.route("/analytics", methods=["GET"])
@@ -77,6 +74,9 @@ def getanalysisdata():
 	data = db.getAnalysisData()
 	return jsonify(data)
 
-@app.route("/searchanimal")
+@app.route("/searchanimal", methods=["POST"])
 def searchanimal():
-	return "Test"
+	if request.method == "POST": 
+		petId = request.form.get("inputPetID")
+		data = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
+	return redirect('/tool')

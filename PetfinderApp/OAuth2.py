@@ -24,8 +24,10 @@ class PetfinderAPI:
 	    	"type" : f"{type}"
 
 		}
-
-		# r = requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params)
-		# print(r.url)
-
 		return requests.get('https://api.petfinder.com/v2/animals', headers=headers, params=params).json()
+
+	def callAPIPetSearch(self,token,petId):
+		headers = {
+			'Authorization': f'Bearer {token["access_token"]}',
+		}
+		return requests.get(f'https://api.petfinder.com/v2/animals/{petId}', headers=headers).json()
