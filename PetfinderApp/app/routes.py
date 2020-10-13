@@ -4,7 +4,7 @@ import config
 import threading
 import time
 from dbConnector import dbConnector
-from neuralNetwork import petfinderNeuralNetwork
+# from neuralNetwork import petfinderNeuralNetwork
 from tasks import apiThread
 from app import app 
 
@@ -62,7 +62,7 @@ def tool():
 	if request.method == "POST":
 		emprequest.form.get("inputEmpID")
 
-	return render_template("tool.html")
+	return render_template("tool2.html")
 
 @app.route("/analytics", methods=["GET"])
 def analytics():
