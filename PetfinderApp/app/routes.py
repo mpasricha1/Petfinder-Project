@@ -50,10 +50,10 @@ def getdata():
 	# t1.start()
 	# t2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, db, "cat", "adopted"), daemon = True)
 	# t2.start()
-	# t5 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
-	# t5.start()
-	# t6 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
-	# t6.start()
+	# t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
+	# t3.start()
+	# t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
+	# t4.start()
 
 	return "Test"
 
@@ -76,3 +76,7 @@ def howitworks():
 def getanalysisdata(): 
 	data = db.getAnalysisData()
 	return jsonify(data)
+
+@app.route("/searchanimal")
+def searchanimal():
+	return "Test"
