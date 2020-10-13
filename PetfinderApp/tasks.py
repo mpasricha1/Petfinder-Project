@@ -46,8 +46,7 @@ def apiSearchAnimal(clientId, clientSecret, tokenURL, db, petId):
 	encodedData= dataEncoder.encodeSingleAnimal(breeds,colors,states)
 	print(encodedData)
 
-	return "Hello"
-
+	return 
 
 	
 

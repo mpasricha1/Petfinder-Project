@@ -13,7 +13,7 @@ class dbConnector:
 		self.State = ""
 
 	def establishConnection(self):
-		self.engine = create_engine(f"postgresql+psycopg2://postgres:swf24R!@localhost/adoption_db")
+		self.engine = create_engine(f"postgresql+psycopg2://postgres:postgres@localhost/adoption_db")
 		self.Base = automap_base()
 		self.Base.prepare(self.engine,reflect=True)
 		self.Animal = self.Base.classes.animal
@@ -89,7 +89,7 @@ class dbConnector:
 
 		trainData = session.query(*sel).\
 				filter(self.Animal.test_train == 'train').\
-				filter(self.Animal.page == None).all()
+				filter(self.Animal.page != None).all()
 
 		session.close()
 		return trainData
@@ -97,7 +97,7 @@ class dbConnector:
 	def getTestData(self):
 		session = Session(self.engine)
 
-		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
+		sel = [self.Animal.id, self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
 			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
 			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
 		testData = session.query(*sel).\

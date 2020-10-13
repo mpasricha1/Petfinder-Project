@@ -9,11 +9,11 @@ class encoder:
 	def encodeAnimal(self,breeds, colors, states, pageCount):
 		newAnimals = []
 		for row in self.data["animals"]:
-			animal = {"breed1": None, 
-					  "breed2": None, 
-					  "color1": None, 
-					  "color2": None, 
-					  "color3": None,
+			animal = {"breed1": 308, 
+					  "breed2": 308, 
+					  "color1": 49, 
+					  "color2": 49, 
+					  "color3": 49,
 					  "age": None, 
 					  "state_name": 51}
 
@@ -220,7 +220,6 @@ class encoder:
 		return newAnimals
 
 	def encodeSingleAnimal(self,breeds, colors, states):
-		print(self.data["animal"]["id"])
 		row = self.data["animal"]
 
 		animal = {"breed1": 308, 

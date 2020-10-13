@@ -3,8 +3,9 @@ from flask.json import jsonify
 import config
 import threading
 import time
+import numpy as np
 from dbConnector import dbConnector
-# from neuralNetwork import petfinderNeuralNetwork
+from neuralNetwork import petfinderNeuralNetwork
 from tasks import apiThread, apiSearchAnimal
 from app import app 
 
@@ -31,24 +32,29 @@ tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 db = dbConnector()
 db.establishConnection()
 
-# trainData = db.getTrainData()
-# neuralNetwork = petfinderNeuralNetwork(trainData)
-# neuralNetwork.trainNetwork()
+trainData = db.getTrainData()
+neuralNetwork = petfinderNeuralNetwork(trainData)
+neuralNetwork.trainNetwork()
 
 @app.route('/')
 @app.route('/index')
 def index():
 	
-	# testData = db.getTestData()
-	# neuralNetwork.predict(testData)
+	testData = db.getTestData()
+	proccessedData = neuralNetwork.predict(testData)
+
+	for row in proccessedData:
+		maxIndexColumn = np.argmax(row, axis=0)
+		print(maxIndexColumn)
+
 	
 	return render_template("index.html")
 
 @app.route('/getdata')
 def getdata():
-	t1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog", "adopted"), daemon = True)
+	t1 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
 	t1.start()
-	t2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, db, "cat", "adopted"), daemon = True)
+	t2 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
 	t2.start()
 	# t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
 	# t3.start()

@@ -39,7 +39,7 @@ class petfinderNeuralNetwork:
 
 		self.model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
-		self.model.fit(X_train_scaled, y_train_categorical, epochs=250, shuffle=True, verbose=2)
+		self.model.fit(X_train_scaled, y_train_categorical, epochs=5, shuffle=True, verbose=2)
 
 	def predict(self, data):
 		df = pd.DataFrame(self.data)
@@ -50,4 +50,6 @@ class petfinderNeuralNetwork:
 		X_scaler = MinMaxScaler().fit(X)
 		X_test_scaled = X_scaler.transform(X)
 
-		print(self.model.predict(X_test_scaled))
+		data = self.model.predict(X_test_scaled)
+
+		return data
