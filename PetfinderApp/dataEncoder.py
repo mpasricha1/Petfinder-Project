@@ -425,7 +425,6 @@ class encoder:
 		animal["url"] = row["url"]
 		animal["page"] = 1
 
-		print(animal)
 
 			
  

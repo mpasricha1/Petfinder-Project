@@ -86,10 +86,9 @@ class dbConnector:
 		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
 			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
 			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
-
 		trainData = session.query(*sel).\
 				filter(self.Animal.test_train == 'train').\
-				filter(self.Animal.page != None).all()
+				filter(self.Animal.page == None).all()
 
 		session.close()
 		return trainData
@@ -102,7 +101,8 @@ class dbConnector:
 			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
 		testData = session.query(*sel).\
 						filter(self.Animal.test_train == 'test').\
-						filter(self.Animal.adoption_speed == None).all()
+						filter(self.Animal.adoption_speed == None).\
+						filter(self.Animal.status == "adoptable").limit(1).all()
 		return testData
 
 	def getAnalysisData(self):
@@ -116,7 +116,23 @@ class dbConnector:
 								 filter(self.Animal.test_train == "train").\
 								 filter(self.Animal.page == None).all()
 
+		session.close()
 		return animalStatsData
+
+	def updateNewPredictions(self, data):
+		session = Session(self.engine)
+		print(data)
+
+		# for row in data: 
+		# 	session.query(Animal).\
+		# 				filter(Animal.id = row["id"]).\
+		# 				update({Animal.adoption_speed: row["score"]})
+		# 	session.commit()
+
+		session.close()
+
+
+
 
 
 

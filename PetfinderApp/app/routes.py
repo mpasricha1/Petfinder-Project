@@ -39,16 +39,34 @@ neuralNetwork.trainNetwork()
 @app.route('/')
 @app.route('/index')
 def index():
-	
-	testData = db.getTestData()
-	proccessedData = neuralNetwork.predict(testData)
+	updateList = []
 
-	for i,j in zip(proccessedData, testData):
-		id = j[0]
-		score = maxIndexColumn = np.argmax(i, axis=0)
-		print(id)
+	testData = db.getTestData()
+	print(testData)
+
+	proccessedData = neuralNetwork.predict(testData)
+	print(proccessedData)
+
+	if len(testData) == 1: 
+		id = testData[0][0]
+		score = np.argmax(proccessedData, axis=0)
 		print(score)
-		print("")
+	else:
+		for i,j in zip(proccessedData, testData):
+			record = {}
+			id = j[0]
+			score = np.argmax(i, axis=0)
+
+			record["id"] = id 
+			record["score"] = score
+
+			updateList.append(record)
+
+	# updateNewPredictions(updateList)
+
+ 
+
+		
 		
 		#print(maxIndexColumn)
 
@@ -70,6 +88,18 @@ def getdata():
 
 @app.route('/tool', methods=["GET","POST"])
 def tool():
+	if request.method == "POST":
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+		empid = request.form.get("inputEmpID")
+
+
 	return render_template("tool2.html")
 
 @app.route("/analytics", methods=["GET"])
@@ -89,5 +119,7 @@ def getanalysisdata():
 def searchanimal():
 	if request.method == "POST": 
 		petId = request.form.get("inputPetID")
-		data = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
+		testData = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
+		proccessedData = neuralNetwork.predict(testData)
+		print(proccessedData)
 	return redirect('/tool')
