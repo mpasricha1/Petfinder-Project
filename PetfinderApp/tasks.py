@@ -2,28 +2,47 @@ from time import sleep
 from OAuth2 import PetfinderAPI
 from dataEncoder import encoder
 
-def apiThreadAdopted(clientID, clientSecret,tokenURL,db, animalType):
+def apiThread(clientID, clientSecret,tokenURL,db, animalType, status):
 	recordCount = 0
 	
 	breeds = db.breedsList() 
 	colors = db.colorsList()
 	states = db.statesList()
 
+
+	# pageCount = db.getPageCount(animalType, status)
+	# print(pageCount)
+	# authenticator = PetfinderAPI(clientID, clientSecret, tokenURL)
+	# token = authenticator.generateAccessToken()
+	# data = authenticator.callAPI(token,pageCount, animalType, status)
+	# dataEncoder = encoder(data)
+	# encodedData = dataEncoder.encodeAnimal(breeds, colors, states, pageCount)
+	# db.insertNewData(encodedData)
+
+	if status == "adopted":
+		maxCalls = 1000
+	else:
+		maxCalls = 10
+
 	while True:
-		if recordCount < 1000:
+		if recordCount < maxCalls:
 			try:
-				pageCount = db.getPageCount(animalType)
+				pageCount = db.getPageCount(animalType, status)
 				print(pageCount)
 				authenticator = PetfinderAPI(clientID, clientSecret, tokenURL)
 				token = authenticator.generateAccessToken()
-				data = authenticator.callAPIAdopted(token,pageCount, animalType)
+				data = authenticator.callAPI(token,pageCount, animalType, status)
 				dataEncoder = encoder(data)
 				encodedData = dataEncoder.encodeAnimal(breeds, colors, states, pageCount)
-				db.insertNewTrainData(encodedData)
+				db.insertNewData(encodedData)
 				sleep(.10)
 				
 			except:
-				print("Error skipping page")
+				print("Error Skipping Page")
 			recordCount+=1
 		else:
 			False
+	return
+
+	
+

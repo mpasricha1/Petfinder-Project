@@ -158,7 +158,12 @@ class encoder:
 					animal["adoption_speed"] = 3
 				else:
 					animal["adoption_speed"] = 4
-			animal["test_train"] = "train"
+			else:
+				animal["adoption_speed"] = None
+			if row["status"].lower() == "adopted":
+				animal["test_train"] = "train"
+			else:
+				animal["test_train"] = "test"
 			if len(row["photos"]) > 1:
 				animal["photo1_small"] = row["photos"][0]["small"]
 				animal["photo1_med"] = row["photos"][0]["medium"]

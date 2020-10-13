@@ -3,16 +3,16 @@
 //     console.log("test");
 //     // Object.entries(breedData).forEach(([key, value]) => {
 //     //   console.log(`${key}: ${value}`);
+// //   });
+//  console.log('Test');
+
+
+//   // Load data from hours-of-tv-watched.csv
+// d3.csv("static/resources/breed_labels.csv").then(function(breedData) {
+//   console.log(breedData);
+//   breedData.forEach(function(data) {
+//     console.log(data.BreedName)
 //   });
- console.log('Test');
-
-
-  // Load data from hours-of-tv-watched.csv
-d3.csv("static/resources/breed_labels.csv").then(function(breedData) {
-  console.log(breedData);
-  breedData.forEach(function(data) {
-    console.log(data.BreedName)
-  });
 
     // var breedName = Object.values(sampledata.breed);
     // // var wfreq = sampledata.metadata[key].wfreq;

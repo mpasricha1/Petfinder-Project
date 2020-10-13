@@ -31,7 +31,7 @@ tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 db = dbConnector()
 db.establishConnection()
 
-# trainData = db.getNeuralNetworkData()
+# trainData = db.getTrainData()
 # neuralNetwork = petfinderNeuralNetwork(trainData)
 # neuralNetwork.trainNetwork()
 
@@ -46,34 +46,33 @@ def index():
 
 @app.route('/getdata')
 def getdata():
-	x1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog"))
-	x1.start()
-
-	x2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, db, "dog"))
-	x2.start()
-
-	x3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog"))
-	x3.start()
-
-	y1 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat"))
-	y1.start()
-
-	y2 = threading.Thread(target=apiThread, args=(clientID5, clientSecret5, tokenURL, db, "cat"))
-	y2.start()
-
-	y3 = threading.Thread(target=apiThread, args=(clientID6, clientSecret6, tokenURL, db, "cat"))
-	y3.start()
+	# t1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret1, tokenURL, db, "dog", "adopted"), daemon = True)
+	# t1.start()
+	# t2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret2, tokenURL, db, "cat", "adopted"), daemon = True)
+	# t2.start()
+	# t5 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
+	# t5.start()
+	# t6 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
+	# t6.start()
 
 	return "Test"
 
-@app.route('/tool')
-def tool(methods=["GET","POST"]):
+@app.route('/tool', methods=["GET","POST"])
+def tool():
+	if request.method == "POST":
+		emprequest.form.get("inputEmpID")
+
 	return render_template("tool.html")
 
-@app.route("/analytics")
+@app.route("/analytics", methods=["GET"])
 def analytics():
 	return render_template("analytics.html")
 
 @app.route("/howitworks")
 def howitworks(): 
 	return render_template("howitworks.html")
+
+@app.route("/getanalysisdata")
+def getanalysisdata(): 
+	data = db.getAnalysisData()
+	return jsonify(data)

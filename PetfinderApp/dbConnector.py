@@ -44,7 +44,7 @@ class dbConnector:
 
 		return states
 
-	def getPageCount(self, animalType):
+	def getPageCount(self, animalType, status):
 		if animalType == "dog": 
 			animalType = 1
 		else: 
@@ -52,11 +52,12 @@ class dbConnector:
 		session = Session(self.engine)
 		pageCount = session.query(self.Animal.page).\
 							filter(self.Animal.type == animalType).\
+							filter(self.Animal.status == status).\
 							order_by(self.Animal.id.desc()).first()
 		pageCount = pageCount[0]+1
 		return pageCount
 
-	def insertNewTrainData(self,data):
+	def insertNewData(self,data):
 		session = Session(self.engine)
 
 		lastId = session.query(self.Animal.id).\
@@ -69,7 +70,7 @@ class dbConnector:
 								   maturity_size=row["maturity_size"], furlength=row["furlength"], vaccinated=row["vaccinated"],
 								   dewormed=row["dewormed"], sterilized=row["sterilized"], health=row["health"], quantity=row["quantity"], 
 								   fee=row["fee"], state_name=row["state_name"], rescuer_id=row["rescuer_id"], video_amt=row["video_amt"],
-								   description=row["description"], pet_id=row["pet_id"], adoption_speed=row["adoption_speed"], 
+								   description=row["description"], pet_id=row["pet_id"], photo_amt=row["photo_amt"], adoption_speed=row["adoption_speed"], 
 								   test_train=row["test_train"],photo1_small=row["photo1_small"], photo1_med=row["photo1_med"],
 								   photo2_small=row["photo2_small"], photo2_med=row["photo2_med"], status=row["status"], 
 								   housetrained=row["housetrained"], declawed=row["declawed"], good_with_kids=row["good_with_kids"],
@@ -79,7 +80,7 @@ class dbConnector:
 			session.commit()
 			newId+=1
 
-	def getNeuralNetworkData(self):
+	def getTrainData(self):
 		session = Session(self.engine)
 
 		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
@@ -87,7 +88,8 @@ class dbConnector:
 			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
 
 		trainData = session.query(*sel).\
-				filter(self.Animal.test_train == 'train').all()
+				filter(self.Animal.test_train == 'train').\
+				filter(self.Animal.page == None).all()
 
 		session.close()
 		return trainData
@@ -99,5 +101,22 @@ class dbConnector:
 			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
 			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
 		testData = session.query(*sel).\
-						filter(self.Animal.test_train == 'test').all()
+						filter(self.Animal.test_train == 'test').\
+						filter(self.Animal.adoption_speed == None).all()
+		return testData
+
+	def getAnalysisData(self):
+		session = Session(self.engine)
+
+		sel = [self.Breed.breed_name, self.Animal.age, self.Animal.adoption_speed, self.Animal.photo_amt, 
+			    self.Animal.fee, self.Animal.maturity_size, self.Animal.type, self.Animal.furlength, self.Animal.gender ]
+
+		animalStatsData = session.query(*sel).\
+								 filter(self.Animal.breed1 == self.Breed.breed_id).\
+								 filter(self.Animal.test_train == "train").\
+								 filter(self.Animal.page == None).all()
+
+		return animalStatsData
+
+
 
