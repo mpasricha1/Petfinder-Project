@@ -44,45 +44,33 @@ def index():
 	testData = db.getTestData()
 	print(testData)
 
-	proccessedData = neuralNetwork.predict(testData)
+	proccessedData = neuralNetwork.predict(testData,0)
 	print(proccessedData)
 
-	if len(testData) == 1: 
-		id = testData[0][0]
-		score = np.argmax(proccessedData, axis=0)
-		print(score)
-	else:
-		for i,j in zip(proccessedData, testData):
-			record = {}
-			id = j[0]
-			score = np.argmax(i, axis=0)
 
-			record["id"] = id 
-			record["score"] = score
+	for i,j in zip(proccessedData, testData):
+		record = {}
+		id = j[0]
+		score = np.argmax(i, axis=0)
 
-			updateList.append(record)
+		record["id"] = id 
+		record["score"] = score
 
-	# updateNewPredictions(updateList)
-
- 
-
-		
-		
-		#print(maxIndexColumn)
-
-	
+		print(record)
+		updateList.append(record)
+	print(updateList)
 	return render_template("index.html")
 
 @app.route('/getdata')
 def getdata():
-	t1 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
-	t1.start()
-	t2 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
-	t2.start()
-	# t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
-	# t3.start()
-	# t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
-	# t4.start()
+	# t1 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
+	# t1.start()
+	# t2 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
+	# t2.start()
+	t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
+	t3.start()
+	t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
+	t4.start()
 
 	return "Test"
 
@@ -117,9 +105,16 @@ def getanalysisdata():
 
 @app.route("/searchanimal", methods=["POST"])
 def searchanimal():
+	returnAnimal = {}
 	if request.method == "POST": 
 		petId = request.form.get("inputPetID")
 		testData = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
-		proccessedData = neuralNetwork.predict(testData)
+		proccessedData = neuralNetwork.predict(testData,1)
 		print(proccessedData)
+		score = np.argmax(proccessedData[0], axis=0)
+		testData["adoption_speed"] = score
+
+		return jsonify(testData)
+		
+
 	return redirect('/tool')

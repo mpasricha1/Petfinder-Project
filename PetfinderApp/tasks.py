@@ -44,9 +44,7 @@ def apiSearchAnimal(clientId, clientSecret, tokenURL, db, petId):
 	data = authenticator.callAPIPetSearch(token,petId)
 	dataEncoder= encoder(data)
 	encodedData= dataEncoder.encodeSingleAnimal(breeds,colors,states)
-	print(encodedData)
 
-	return 
+	return encodedData
 
-	
 

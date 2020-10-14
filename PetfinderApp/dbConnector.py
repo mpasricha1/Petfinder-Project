@@ -30,6 +30,11 @@ class dbConnector:
 		
 		return breeds
 
+	def getBreed(self, breedId):
+		session = Session(self.engine)
+		breed = session.query(self.Breed.breed_name).\
+						filter(self.Breed.breed_id == breedId).all()
+
 	def colorsList(self):
 		session = Session(self.engine)
 		colors = session.query(self.Color.color_code, self.Color.color_name).all()
@@ -85,10 +90,10 @@ class dbConnector:
 
 		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
 			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
-			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
+			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed]
 		trainData = session.query(*sel).\
 				filter(self.Animal.test_train == 'train').\
-				filter(self.Animal.page == None).all()
+				filter(self.Animal.page != None).all()
 
 		session.close()
 		return trainData
@@ -102,7 +107,8 @@ class dbConnector:
 		testData = session.query(*sel).\
 						filter(self.Animal.test_train == 'test').\
 						filter(self.Animal.adoption_speed == None).\
-						filter(self.Animal.status == "adoptable").limit(1).all()
+						filter(self.Animal.status == "adoptable").\
+						filter(self.Animal.page != None).limit(10).all()
 		return testData
 
 	def getAnalysisData(self):
@@ -121,7 +127,6 @@ class dbConnector:
 
 	def updateNewPredictions(self, data):
 		session = Session(self.engine)
-		print(data)
 
 		# for row in data: 
 		# 	session.query(Animal).\

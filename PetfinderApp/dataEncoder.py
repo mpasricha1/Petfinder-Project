@@ -211,8 +211,6 @@ class encoder:
 				animal["good_with_dogs"]  = 0
 			animal["url"] = row["url"]
 			animal["page"] = pageCount
-
-			print(animal)
   
 			newAnimals.append(animal)
 			
@@ -426,6 +424,6 @@ class encoder:
 		animal["page"] = 1
 
 
-			
+		return animal
  
 		
