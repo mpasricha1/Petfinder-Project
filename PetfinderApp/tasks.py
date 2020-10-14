@@ -13,7 +13,7 @@ def apiThread(clientID, clientSecret,tokenURL,db, animalType, status):
 	if status == "adopted":
 		maxCalls = 1000
 	else:
-		maxCalls = 10
+		maxCalls = 100
 
 	while True:
 		if recordCount < maxCalls:

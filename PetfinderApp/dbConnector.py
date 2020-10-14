@@ -148,6 +148,7 @@ class dbConnector:
 					filter(self.Animal.adoption_speed > 3).\
 					filter(self.Animal.test_train == 'test').\
 					filter(self.Animal.description != None).\
+					filter(self.Animal.photo1_small != None).\
 					order_by(func.random()).first()
 
 		catData = session.query(self.Animal).\
@@ -157,6 +158,7 @@ class dbConnector:
 					filter(self.Animal.adoption_speed > 1).\
 					filter(self.Animal.test_train == 'test').\
 					filter(self.Animal.description != None).\
+					filter(self.Animal.photo1_small != None).\
 					order_by(func.random()).first()
 
 		animalList.append(dogData)

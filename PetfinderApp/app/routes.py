@@ -44,14 +44,14 @@ def index():
 
 @app.route('/getdata')
 def getdata():
-	t1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
-	t1.start()
-	t2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
-	t2.start()
-	# t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
-	# t3.start()
-	# t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
-	# t4.start()
+	# t1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
+	# t1.start()
+	# t2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
+	# t2.start()
+	t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
+	t3.start()
+	t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
+	t4.start()
 
 	return "Test"
 
