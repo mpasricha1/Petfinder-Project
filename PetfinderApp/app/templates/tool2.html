@@ -92,7 +92,9 @@
 						<div class="form-group">
 			     			<label for="breed1">Primary Breed</label>
 			    			<select class="form-control" id="breed1" name="breed1" onchange="optionChanged(this.value)">
-			      				<option>INSERT BREED DROPDOWN</option>
+			    				{% for b in breeds %}
+									<option value={{b[0].breed_id}} >{{b[1]}}</option>
+								{% endfor %}
 			    			</select>
 						</div>
 					</div>
@@ -100,7 +102,9 @@
 						<div class="form-group">
 			     			<label for="breed2">Secondary Breed</label>
 			    			<select class="form-control" id="breed2" name="breed2">
-			      				<option>INSERT BREED DROPDOWN</option>
+			      				{% for b in breeds %}
+									<option value={{b[0].breed_id}} >{{b[1]}}</option>
+								{% endfor %}
 			    			</select>
 			    		</div>
 			    	</div>
@@ -110,7 +114,9 @@
 						<div class="form-group">
 			     			<label for="color1">Color</label>
 			    			<select class="form-control" id="color1" name="color1">
-			      				<option>INSERT COLOR DROPDOWN</option>
+			      				{% for c in colors %}
+									<option value={{c[0].color_code}} >{{c[1]}}</option>
+								{% endfor %}
 			    			</select>
 						</div>
 					</div>
@@ -118,7 +124,9 @@
 						<div class="form-group">
 			     			<label for="color2">Secondary Color</label>
 			    			<select class="form-control" id="color2" name="color2">
-			      				<option>INSERT COLOR DROPDOWN</option>
+			      				{% for c in colors %}
+									<option value={{c[0].color_code}} >{{c[1]}}</option>
+								{% endfor %}
 			    			</select>
 						</div>
 					</div>

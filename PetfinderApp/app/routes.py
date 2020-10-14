@@ -130,8 +130,8 @@ def tool():
 		animal["vidCount"] = request.form.get("videoCount")
 
 	print(animal)
-	
-	return render_template("tool2.html", data=None)
+	dataList = [breeds,colors]
+	return render_template("tool2.html", breeds=breeds, colors=colors, data="")
 
 @app.route("/analytics", methods=["GET"])
 def analytics():
@@ -149,13 +149,14 @@ def getanalysisdata():
 @app.route("/searchanimal", methods=["POST"])
 def searchanimal():
 	returnAnimal = {}
+	breeds = db.breedsList()
+	colors = db.colorsList()
 	if request.method == "POST": 
 		petId = request.form.get("inputPetID")
 		testData = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
 		proccessedData = neuralNetwork.predict(testData,True,True)
 		testData = prepDataForProfile(testData,db,proccessedData)
 
-		print(testData)
 		return render_template("tool2.html", data=testData)
 		
 
