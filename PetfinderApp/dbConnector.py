@@ -85,12 +85,19 @@ class dbConnector:
 			session.commit()
 			newId+=1
 
-	def getTrainData(self):
+	def getTrainData(self, dataType):
 		session = Session(self.engine)
 
-		sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
-			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
-			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed]
+		if dataType == True:
+			sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
+				   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
+				   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed]
+		else:
+			sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
+				   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
+				   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed, 
+				   self.Animal.declawed, self.Animal.housetrained, self.Animal.good_with_dogs, self.Animal.good_with_cats, 
+				   self.Animal.good_with_kids]
 		trainData = session.query(*sel).\
 				filter(self.Animal.test_train == 'train').\
 				filter(self.Animal.page == None).all()

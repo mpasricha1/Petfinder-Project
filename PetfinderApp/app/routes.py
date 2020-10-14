@@ -32,9 +32,9 @@ tokenURL = "https://api.petfinder.com/v2/oauth2/token"
 db = dbConnector()
 db.establishConnection()
 
-trainData = db.getTrainData()
+trainData = db.getTrainData(True)
 neuralNetwork = petfinderNeuralNetwork(trainData)
-neuralNetwork.trainNetwork()
+neuralNetwork.trainNetwork(True)
 
 @app.route('/')
 @app.route('/index')
@@ -74,18 +74,63 @@ def updatepredictions():
 
 @app.route('/tool', methods=["GET","POST"])
 def tool():
+	animal = {}
+	breeds = db.breedsList()
+	colors = db.colorsList()
+
 	if request.method == "POST":
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
-		empid = request.form.get("inputEmpID")
+		animal["empId"] = request.form.get("inputEmpID")
+		animal["shelterId"] = request.form.get("inputShelter")
+		animal["acqDate"] = request.form.get("inputDate")
+		animal["zipcode"] = request.form.get("inputZip")
+		if request.form.get("sex") == "Male":
+			animal["gender"] = 1
+		elif request.form.get("sex") == "Female":
+			animal["gender"] = 2
+		else:
+			animal["gender"] = 3
+		if request.form.get("petType") == "Dog":
+			animal["petType"] = 1
+		else:
+			animal["petType"] = 2
+		animal["petName"] = request.form.get("petName")
+		animal["age"]= request.form.get("petAge")
+		animal["primaryBreed"] = request.form.get("breed1")
+		animal["secondaryBreed"] = request.form.get("breed2")
+		animal["primaryColor"] = request.form.get("color1")
+		animal["secondaryColor"] = request.form.get("color2")
+		animal["thirdColor"] = 49
+		animal["furLenghth"] = request.form.get("furlenghth")
+		animal["breedSize"] == request.form.get("breedSize")
+		if request.form.get("goodKids") != None:
+			animal["goodKids"] = 1
+		else: 
+			animal["goodKids"] = 0
+		if request.form.get("goodCats") != None:
+			animal["goodCats"] = 1 
+		else: 
+			animal["goodCats"] = 0 
+		if request.form.get("goodDogs") != None:
+			animal["goodDogs"] = 1
+		else:
+			animal["goodDogs"] = 0 
+		if request.form.get("vaccinated") != None: 
+			animal["vac"] = 1 
+		else:
+			animal["vac"] = 0
+		if request.form.get("dewormed") != None: 
+			animal["worm"] = 1
+		else:
+			animal["worm"] = 0
+		if request.form.get("sterilized") != None:
+			animal["ster"] = 1
+		else:
+			animal["ster"] = 0
+		animal["photoCount"] = request.form.get("photoCount")
+		animal["vidCount"] = request.form.get("videoCount")
 
-
+	print(animal)
+	
 	return render_template("tool2.html", data=None)
 
 @app.route("/analytics", methods=["GET"])
@@ -107,7 +152,7 @@ def searchanimal():
 	if request.method == "POST": 
 		petId = request.form.get("inputPetID")
 		testData = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
-		proccessedData = neuralNetwork.predict(testData,1)
+		proccessedData = neuralNetwork.predict(testData,True,True)
 		testData = prepDataForProfile(testData,db,proccessedData)
 
 		print(testData)
