@@ -1,6 +1,6 @@
 from sqlalchemy.ext.automap import automap_base 
 from sqlalchemy.ext.declarative import declarative_base 
-from sqlalchemy import create_engine, and_
+from sqlalchemy import create_engine, and_, func
 from sqlalchemy.orm import Session
 
 class dbConnector:
@@ -93,7 +93,7 @@ class dbConnector:
 			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed]
 		trainData = session.query(*sel).\
 				filter(self.Animal.test_train == 'train').\
-				filter(self.Animal.page != None).all()
+				filter(self.Animal.page == None).all()
 
 		session.close()
 		return trainData
@@ -108,7 +108,7 @@ class dbConnector:
 						filter(self.Animal.test_train == 'test').\
 						filter(self.Animal.adoption_speed == None).\
 						filter(self.Animal.status == "adoptable").\
-						filter(self.Animal.page != None).limit(10).all()
+						filter(self.Animal.page != None).all()
 		return testData
 
 	def getAnalysisData(self):
@@ -127,14 +127,48 @@ class dbConnector:
 
 	def updateNewPredictions(self, data):
 		session = Session(self.engine)
+		print(len(data))
 
-		# for row in data: 
-		# 	session.query(Animal).\
-		# 				filter(Animal.id = row["id"]).\
-		# 				update({Animal.adoption_speed: row["score"]})
-		# 	session.commit()
+		for row in data: 
+			session.query(self.Animal).\
+						filter(self.Animal.id == row["id"]).\
+						update({self.Animal.adoption_speed: int(row["score"])})
+			session.commit()
 
 		session.close()
+
+	def getHomeAnimalData(self):
+		session = Session(self.engine)
+		animalList = [] 
+
+		dogData = session.query(self.Animal).\
+					filter(self.Animal.page != None).\
+					filter(self.Animal.type == 1).\
+					filter(self.Animal.status == 'adoptable').\
+					filter(self.Animal.adoption_speed > 3).\
+					filter(self.Animal.test_train == 'test').\
+					filter(self.Animal.description != None).\
+					order_by(func.random()).first()
+
+		catData = session.query(self.Animal).\
+					filter(self.Animal.page != None).\
+					filter(self.Animal.type == 2).\
+					filter(self.Animal.status == 'adoptable').\
+					filter(self.Animal.adoption_speed > 1).\
+					filter(self.Animal.test_train == 'test').\
+					filter(self.Animal.description != None).\
+					order_by(func.random()).first()
+
+		animalList.append(dogData)
+		animalList.append(catData)
+
+		session.close()
+		return animalList
+
+
+		
+
+
 
 
 

@@ -3,6 +3,7 @@ from flask.json import jsonify
 import config
 import threading
 import time
+import numpy as np
 from dbConnector import dbConnector
 from neuralNetwork import petfinderNeuralNetwork
 from tasks import apiThread, apiSearchAnimal, prepDataForProfile
@@ -38,11 +39,27 @@ neuralNetwork.trainNetwork()
 @app.route('/')
 @app.route('/index')
 def index():
-	updateList = []
+	data = db.getHomeAnimalData()
+	return render_template("index.html", data=data)
 
+@app.route('/getdata')
+def getdata():
+	t1 = threading.Thread(target=apiThread, args=(clientID1, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
+	t1.start()
+	t2 = threading.Thread(target=apiThread, args=(clientID2, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
+	t2.start()
+	# t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
+	# t3.start()
+	# t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
+	# t4.start()
+
+	return "Test"
+
+@app.route('/updatepredictions')
+def updatepredictions():
+	updateList = []
 	testData = db.getTestData()
 	proccessedData = neuralNetwork.predict(testData,0)
-
 
 	for i,j in zip(proccessedData, testData):
 		record = {}
@@ -52,20 +69,7 @@ def index():
 		record["id"] = id 
 		record["score"] = score
 		updateList.append(record)
-	print(updateList)
-	return render_template("index.html")
-
-@app.route('/getdata')
-def getdata():
-	# t1 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adopted"), daemon = True)
-	# t1.start()
-	# t2 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adopted"), daemon = True)
-	# t2.start()
-	t3 = threading.Thread(target=apiThread, args=(clientID3, clientSecret3, tokenURL, db, "dog", "adoptable"), daemon = True)
-	t3.start()
-	t4 = threading.Thread(target=apiThread, args=(clientID4, clientSecret4, tokenURL, db, "cat", "adoptable"), daemon = True)
-	t4.start()
-
+	db.updateNewPredictions(updateList)
 	return "Test"
 
 @app.route('/tool', methods=["GET","POST"])
