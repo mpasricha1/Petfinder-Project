@@ -39,10 +39,19 @@ body {
 }
 
 .navbar {
-  padding: 5px;
+  padding: 10px;
   margin: 0;
+  font-size: 20px;
 }
 
+.navbar-brand {
+  font-size: 25px;
+  color: #0aaab9;
+}
+
+#jumbo {
+  padding: 5px;
+}
 /* Card Image size */
 .card-img-top {
     width: 100%;
@@ -51,17 +60,28 @@ body {
 }
 
 .card {
-    border: 1px solid #ccc;
-    background-color: #4B0082;
-    padding: 20px;
-    margin-bottom: 10px;
+    border: .5px solid #0aaab9;
+    background-color: #E6E9E9;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-bottom: $card-deck-margin;
 }
 
-.cardQuote {
+
+.hiw-card {
     border: 1px solid #ccc;
-    background-color: #1E90FF;
-    padding: 20px;
+    background-color: #E6E9E9;
+    padding: 10px;
     margin-bottom: 10px;
+}
+.cardQuote {
+    background-color: #ccc;
+    padding: 0px;
+    margin-bottom: 5px;
+    text-align: "center";
+    font-size: 40px;
+    color: #0aaab9;
+    font-style: "bold";
 }
 
 
