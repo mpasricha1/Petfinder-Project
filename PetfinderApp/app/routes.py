@@ -3,10 +3,9 @@ from flask.json import jsonify
 import config
 import threading
 import time
-import numpy as np
 from dbConnector import dbConnector
 from neuralNetwork import petfinderNeuralNetwork
-from tasks import apiThread, apiSearchAnimal
+from tasks import apiThread, apiSearchAnimal, prepDataForProfile
 from app import app 
 
 clientID1 = config.API_KEY_1
@@ -42,10 +41,7 @@ def index():
 	updateList = []
 
 	testData = db.getTestData()
-	print(testData)
-
 	proccessedData = neuralNetwork.predict(testData,0)
-	print(proccessedData)
 
 
 	for i,j in zip(proccessedData, testData):
@@ -55,8 +51,6 @@ def index():
 
 		record["id"] = id 
 		record["score"] = score
-
-		print(record)
 		updateList.append(record)
 	print(updateList)
 	return render_template("index.html")
@@ -88,7 +82,7 @@ def tool():
 		empid = request.form.get("inputEmpID")
 
 
-	return render_template("tool2.html")
+	return render_template("tool2.html", data=None)
 
 @app.route("/analytics", methods=["GET"])
 def analytics():
@@ -110,11 +104,10 @@ def searchanimal():
 		petId = request.form.get("inputPetID")
 		testData = apiSearchAnimal(clientID5,clientSecret5,tokenURL,db,petId)
 		proccessedData = neuralNetwork.predict(testData,1)
-		print(proccessedData)
-		score = np.argmax(proccessedData[0], axis=0)
-		testData["adoption_speed"] = score
+		testData = prepDataForProfile(testData,db,proccessedData)
 
-		return jsonify(testData)
+		print(testData)
+		return render_template("tool2.html", data=testData)
 		
 
 	return redirect('/tool')

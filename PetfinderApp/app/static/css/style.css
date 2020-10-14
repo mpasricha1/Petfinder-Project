@@ -55,13 +55,13 @@ body {
 /* Card Image size */
 .card-img-top {
     width: 100%;
-    height: 15vw;
+    height: 25vw;
     object-fit: cover;
 }
 
 .card {
     border: .5px solid #0aaab9;
-    background-color: #E6E9E9;
+    /*background-color: #E6E9E9;*/
     padding: 15px;
     margin-bottom: 15px;
     margin-bottom: $card-deck-margin;
@@ -70,12 +70,12 @@ body {
 
 .hiw-card {
     border: 1px solid #ccc;
-    background-color: #E6E9E9;
+    /*background-color: #E6E9E9;*/
     padding: 10px;
     margin-bottom: 10px;
 }
 .cardQuote {
-    background-color: #ccc;
+    /*background-color: #ccc;*/
     padding: 0px;
     margin-bottom: 5px;
     text-align: "center";
