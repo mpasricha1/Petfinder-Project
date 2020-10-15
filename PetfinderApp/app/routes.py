@@ -93,15 +93,23 @@ def tool():
 			animal["type"] = 1
 		else:
 			animal["type"] = 2
-		animal["petName"] = request.form.get("petName")
+		animal["name"] = request.form.get("petName")
 		animal["age"]= request.form.get("petAge")
 		animal["breed1"] = request.form.get("breed1")
 		animal["breed2"] = request.form.get("breed2")
 		animal["color1"] = request.form.get("color1")
 		animal["color2"] = request.form.get("color2")
 		animal["color3"] = 49
-		animal["furlength"] = request.form.get("furlenghth")
-		animal["maturity_size"] = request.form.get("breedsize")
+		if request.form.get("furlenghth") == "Short":
+			animal["furlength"] = 1
+		elif request.form.get("furlenghth") == "Medium":
+			animal["furlength"] = 2
+		elif request.form.get("furlenghth") == "Long":
+			animal["furlength"] = 3
+		elif request.form.get("furlenghth") == "Wirey":
+			animal["furlength"] = 4
+		else:
+			animal["furlength"] = 5
 		if request.form.get("breedsize") == "Small":
 			animal["maturity_size"] = 1
 		elif request.form.get("breedsize") == "Medium":
@@ -112,7 +120,6 @@ def tool():
 			animal["maturity_size"] = 4
 		else:
 			animal["health"] = 5
-
 		if request.form.get("goodKids") != None:
 			animal["good_with_kids"] = 1
 		else: 
@@ -148,10 +155,11 @@ def tool():
 			animal["health"] = 3
 		else:
 			animal["health"] = 4
+		proccessedData = neuralNetwork.predict(animal,True,True)
+		data = prepDataForProfile(animal,db,proccessedData)
 
-	print(animal)
-	# proccessedData = neuralNetwork.predict(animal,True,True)
-	# data = prepDataForProfile(testData,db,proccessedData)
+		return render_template("tool2.html", data=data, breeds=breeds, colors=colors)
+	
 	return render_template("tool2.html", breeds=breeds, colors=colors, data="")
 
 @app.route("/analytics", methods=["GET"])
