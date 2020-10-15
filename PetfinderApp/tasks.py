@@ -19,7 +19,6 @@ def apiThread(clientID, clientSecret,tokenURL,db, animalType, status):
 		if recordCount < maxCalls:
 			try:
 				pageCount = db.getPageCount(animalType, status)
-				print(pageCount)
 				authenticator = PetfinderAPI(clientID, clientSecret, tokenURL)
 				token = authenticator.generateAccessToken()
 				data = authenticator.callAPI(token,pageCount, animalType, status)

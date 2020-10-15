@@ -48,7 +48,7 @@ class petfinderNeuralNetwork:
 
 		self.model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
-		self.model.fit(X_train_scaled, y_train_categorical, epochs=1, shuffle=True, verbose=2)
+		self.model.fit(X_train_scaled, y_train_categorical, epochs=250, shuffle=True, verbose=2)
 
 	def predict(self, predictData, dfType, predictType):
 		if dfType == True:
