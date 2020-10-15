@@ -102,6 +102,17 @@ def tool():
 		animal["color3"] = 49
 		animal["furlength"] = request.form.get("furlenghth")
 		animal["maturity_size"] = request.form.get("breedsize")
+		if request.form.get("breedsize") == "Small":
+			animal["maturity_size"] = 1
+		elif request.form.get("breedsize") == "Medium":
+			animal["maturity_size"] = 2
+		elif request.form.get("breedsize") == "Large":
+			animal["maturity_size"] = 3
+		elif request.form.get("breedsize") == "Extra Large":
+			animal["maturity_size"] = 4
+		else:
+			animal["health"] = 5
+
 		if request.form.get("goodKids") != None:
 			animal["good_with_kids"] = 1
 		else: 
