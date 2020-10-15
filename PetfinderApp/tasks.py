@@ -43,15 +43,16 @@ def apiSearchAnimal(clientId, clientSecret, tokenURL, db, petId):
 	authenticator = PetfinderAPI(clientId, clientSecret, tokenURL)
 	token = authenticator.generateAccessToken()
 	data = authenticator.callAPIPetSearch(token,petId)
-	dataEncoder= encoder(data)
-	encodedData= dataEncoder.encodeSingleAnimal(breeds,colors,states)
+	dataEncoder = encoder(data)
+	encodedData = dataEncoder.encodeSingleAnimal(breeds,colors,states)
 
 	return encodedData
 
 def prepDataForProfile(data, db, results): 
 	score = np.argmax(results[0], axis=0)
 	data["adoption_speed"] = score
-	data["age"] = int(data["age"] / 12)
+	data["age"] = int(data["age"]) / 12
+	data["age"] = int(data["age"])
 
 	if data["breed1"] != None:
  		data["breed1"] = db.getBreed(data["breed1"])

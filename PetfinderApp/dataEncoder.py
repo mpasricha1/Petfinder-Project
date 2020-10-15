@@ -425,5 +425,6 @@ class encoder:
 
 
 		return animal
- 
+ 	
+
 		
