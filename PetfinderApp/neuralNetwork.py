@@ -21,12 +21,15 @@ class petfinderNeuralNetwork:
 		if trainType == True:
 			X = df[["type", "age", "breed1", "breed2", "gender", "color1",
 			      "color2", "color3", "maturity_size", "furlength", "vaccinated", 
-			      "dewormed", "sterilized", "health", "fee"]]
+			      "dewormed", "sterilized", "health", "fee", "photo_amt", "video_amt"]]
+			inputDim = 17
 		else:
 			X = df[["type", "age", "breed1", "breed2", "gender", "color1",
 		      "color2", "color3", "maturity_size", "furlength", "vaccinated", 
 		      "dewormed", "sterilized", "health", "fee", "housetrained", 
-		      "declawed", "good_with_kids", "good_with_cats", "good_with_dogs"]]
+		      "declawed", "good_with_kids", "good_with_cats", "good_with_dogs", "photo_amt", "video_amt"]]
+			
+			inputDim = 22
 		y = df[["adoption_speed"]]
 
 		X_scaler = MinMaxScaler().fit(X)
@@ -36,11 +39,11 @@ class petfinderNeuralNetwork:
 
 		self.model = Sequential() 
 
-		self.model.add(Dense(units=200, activation='relu', input_dim=15))
+		self.model.add(Dense(units=200, activation='relu', input_dim=inputDim))
 		self.model.add(Dense(units=200, activation="relu"))
 		self.model.add(Dense(units=200, activation="relu"))
 		self.model.add(Dense(units=200, activation="relu"))
-		self.model.add(Dense(units=5, activation="softmax"))
+		self.model.add(Dense(units=5, activation="softmax")),
 
 
 		self.model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -56,12 +59,12 @@ class petfinderNeuralNetwork:
 		if predictType == True:
 			X = df[["type", "age", "breed1", "breed2", "gender", "color1",
 			      "color2", "color3", "maturity_size", "furlength", "vaccinated", 
-			      "dewormed", "sterilized", "health", "fee"]]
+			      "dewormed", "sterilized", "health", "fee","photo_amt", "video_amt"]]
 		else:
 			X = df[["type", "age", "breed1", "breed2", "gender", "color1",
 		      "color2", "color3", "maturity_size", "furlength", "vaccinated", 
 		      "dewormed", "sterilized", "health", "fee", "house_trained", 
-		      "declawed", "good_with_kids", "good_with_cats", "good_with_dogs"]]
+		      "declawed", "good_with_kids", "good_with_cats", "good_with_dogs","photo_amt", "video_amt"]]
 
 		X_scaler = MinMaxScaler().fit(X)
 		X_test_scaled = X_scaler.transform(X)

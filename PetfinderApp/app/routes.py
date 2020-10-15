@@ -90,47 +90,57 @@ def tool():
 		else:
 			animal["gender"] = 3
 		if request.form.get("petType") == "Dog":
-			animal["petType"] = 1
+			animal["type"] = 1
 		else:
-			animal["petType"] = 2
+			animal["type"] = 2
 		animal["petName"] = request.form.get("petName")
 		animal["age"]= request.form.get("petAge")
-		animal["primaryBreed"] = request.form.get("breed1")
-		animal["secondaryBreed"] = request.form.get("breed2")
-		animal["primaryColor"] = request.form.get("color1")
-		animal["secondaryColor"] = request.form.get("color2")
-		animal["thirdColor"] = 49
-		animal["furLenghth"] = request.form.get("furlenghth")
-		animal["breedSize"] == request.form.get("breedSize")
+		animal["breed1"] = request.form.get("breed1")
+		animal["breed2"] = request.form.get("breed2")
+		animal["color1"] = request.form.get("color1")
+		animal["color2"] = request.form.get("color2")
+		animal["color3"] = 49
+		animal["furlength"] = request.form.get("furlenghth")
+		animal["maturity_size"] = request.form.get("breedsize")
 		if request.form.get("goodKids") != None:
-			animal["goodKids"] = 1
+			animal["good_with_kids"] = 1
 		else: 
-			animal["goodKids"] = 0
+			animal["good_with_kids"] = 0
 		if request.form.get("goodCats") != None:
-			animal["goodCats"] = 1 
+			animal["good_with_cats"] = 1 
 		else: 
-			animal["goodCats"] = 0 
+			animal["good_with_cats"] = 0 
 		if request.form.get("goodDogs") != None:
-			animal["goodDogs"] = 1
+			animal["good_with_dogs"] = 1
 		else:
-			animal["goodDogs"] = 0 
+			animal["good_with_dogs"] = 0 
 		if request.form.get("vaccinated") != None: 
-			animal["vac"] = 1 
+			animal["vaccinated"] = 1 
 		else:
-			animal["vac"] = 0
+			animal["vaccinated"] = 0
 		if request.form.get("dewormed") != None: 
-			animal["worm"] = 1
+			animal["dewormed"] = 1
 		else:
-			animal["worm"] = 0
+			animal["dewormed"] = 0
 		if request.form.get("sterilized") != None:
-			animal["ster"] = 1
+			animal["sterilized"] = 1
 		else:
-			animal["ster"] = 0
-		animal["photoCount"] = request.form.get("photoCount")
-		animal["vidCount"] = request.form.get("videoCount")
+			animal["sterilized"] = 0
+		animal["photo_amt"] = request.form.get("photoCount")
+		animal["video_amt"] = request.form.get("videoCount")
+		animal["fee"] = request.form.get("fee")
+		if request.form.get("health") == "Healthy":
+			animal["health"] = 1
+		elif request.form.get("health") == "Minor Injury":
+			animal["health"] = 2
+		elif request.form.get("health") == "Serious Injury":
+			animal["health"] = 3
+		else:
+			animal["health"] = 4
 
 	print(animal)
-	dataList = [breeds,colors]
+	# proccessedData = neuralNetwork.predict(animal,True,True)
+	# data = prepDataForProfile(testData,db,proccessedData)
 	return render_template("tool2.html", breeds=breeds, colors=colors, data="")
 
 @app.route("/analytics", methods=["GET"])
@@ -157,7 +167,7 @@ def searchanimal():
 		proccessedData = neuralNetwork.predict(testData,True,True)
 		testData = prepDataForProfile(testData,db,proccessedData)
 
-		return render_template("tool2.html", data=testData)
+		return render_template("tool2.html", data=testData, breeds=breeds, colors=colors)
 		
 
 	return redirect('/tool')

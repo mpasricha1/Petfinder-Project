@@ -91,13 +91,14 @@ class dbConnector:
 		if dataType == True:
 			sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
 				   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
-				   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed]
+				   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed,
+				   self.Animal.photo_amt, self.Animal.video_amt]
 		else:
 			sel = [self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
 				   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
 				   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed, 
 				   self.Animal.declawed, self.Animal.housetrained, self.Animal.good_with_dogs, self.Animal.good_with_cats, 
-				   self.Animal.good_with_kids]
+				   self.Animal.good_with_kids, self.Animal.photo_amt, self.Animal.video_amt]
 		trainData = session.query(*sel).\
 				filter(self.Animal.test_train == 'train').\
 				filter(self.Animal.page == None).all()
@@ -110,7 +111,8 @@ class dbConnector:
 
 		sel = [self.Animal.id, self.Animal.type, self.Animal.age, self.Animal.breed1, self.Animal.breed2, self.Animal.gender, self.Animal.color1,
 			   self.Animal.color2, self.Animal.color3, self.Animal.maturity_size, self.Animal.furlength, self.Animal.vaccinated, 
-			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed ]
+			   self.Animal.dewormed, self.Animal.sterilized, self.Animal.health, self.Animal.fee, self.Animal.adoption_speed, 
+			   self.Animal.photo_amt, self.Animal.video_amt]
 		testData = session.query(*sel).\
 						filter(self.Animal.test_train == 'test').\
 						filter(self.Animal.adoption_speed == None).\
