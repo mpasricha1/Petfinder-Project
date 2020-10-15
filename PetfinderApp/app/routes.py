@@ -77,6 +77,8 @@ def tool():
 	animal = {}
 	breeds = db.breedsList()
 	colors = db.colorsList()
+	stockImage = {}
+	stockImage["photo1_med"] = "../static/photos/stockimage.png"
 
 	if request.method == "POST":
 		animal["empId"] = request.form.get("inputEmpID")
@@ -157,10 +159,11 @@ def tool():
 			animal["health"] = 4
 		proccessedData = neuralNetwork.predict(animal,True,True)
 		data = prepDataForProfile(animal,db,proccessedData)
+		data["photo1_med"] = "../static/photos/stockimage.png"
 
 		return render_template("tool2.html", data=data, breeds=breeds, colors=colors)
 	
-	return render_template("tool2.html", breeds=breeds, colors=colors, data="")
+	return render_template("tool2.html", breeds=breeds, colors=colors, data=stockImage)
 
 @app.route("/analytics", methods=["GET"])
 def analytics():
