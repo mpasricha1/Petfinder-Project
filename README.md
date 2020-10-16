@@ -53,13 +53,14 @@ Same Day Adoption
 * 8 and 30 days (1st month)
 * 31 and 90 days (2nd & 3rd month)
 * No adoption after 100 days of being listed
-
+<br>
 ![Training](images/Training.png)
+
 
 ## Tool
 Using the tool will enable shelter/agency employees to compile and store important data and features of each animal in their care. As they update the database with the adoption status and dates of adoption, this data will feed the model, therefore building a stronger, more accurate prediction tool over time. This information can be used to modify marketing strategies, coordinate fostering efforts, or predict the capacity of the shelter
-
-![Tool](images/Website Workflow.png)
+<br>
+![Tool](images/website.png)
 
 
 # Machine Learning Models
