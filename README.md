@@ -2,7 +2,7 @@
 ### Mark Pasrich, Melissa Hazelgreen, and Kristin Aspromonti Submitted 10/15/2020
 
 ## Objective
-To Positively influes adoption outcomes for animals that are least likely to be adopted
+To Positively influence adoption outcomes for animals that are least likely to be adopted.
 
 # Background
 Our mission is to help shelters and adoption agencies to compile their data in order to predict the probability of adoption for their animals. Those findings can be used with targeted marketing campaigns that will promote the animals with the lowest percentages. The ultimate goal is to positively influence adoption outcomes and reduce shelter life for these special needs animals.
